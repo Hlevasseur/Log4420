@@ -127,5 +127,7 @@ footer{
   border-top-width: 1px;
   border-color: #cccccc;
 
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
