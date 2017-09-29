@@ -2,11 +2,11 @@ body{
   width:100%;
   margin:0px;
   font-family: sans-serif;
-  
+
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  
+
 }
 /***** Header *****/
 header{
@@ -36,7 +36,7 @@ header{
   border-radius: 4px;
 }
 
-/* Logo */ 
+/* Logo */
 .header-content > a {
   display: flex;
 	align-items: flex-end;
@@ -91,6 +91,29 @@ main{
 
 }
 
+/***** Contact *****/
+
+.contact-content {
+  display: flex;
+  border-style: solid;
+  border-color: #999999;
+  border-radius: 4px;
+  border-width: 1px;
+  margin-top: 30px;
+  padding: 20px 0px 20px;
+}
+
+.contact-content > section {
+  flex-basis: 33%;
+  text-align: center;
+}
+
+.contact-content > section .fa {
+  margin-bottom: 8px;
+}
+
+/***** End Contact *****/
+
 #home-img{
   height: 300px;
 }
@@ -98,7 +121,7 @@ main{
 /***** Footer *****/
 footer{
 	height:70px;
-  
+
   background-color: #eeeeee;
   border-top:solid;
   border-top-width: 1px;
@@ -106,4 +129,3 @@ footer{
 
   text-align: center;
 }
-
