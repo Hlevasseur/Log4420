@@ -1,1 +1,5 @@
 image index à remonter (pb du float)
+
+Francois:
+- page de commande
+- page de confirmation
