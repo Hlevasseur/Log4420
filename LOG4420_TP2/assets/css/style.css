@@ -113,6 +113,64 @@ main{
 }
 
 /***** End Contact *****/
+
+
+/***** Shopping-Cart *****/
+
+table.shopping-cart-table {
+  text-align: left;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.shopping-cart-table thead {
+  border-bottom: 1px solid black;
+}
+
+table.shopping-cart-table tbody {
+  border-bottom: 1px solid black;
+}
+
+table.shopping-cart-table .first-column {
+  height: 35px;
+  width: 30px;
+  box-sizing: border-box;
+}
+
+table.shopping-cart-table .last-column {
+  text-align: right;
+}
+
+.shopping-cart-button {
+  width: 23px;
+  height: 23px;
+  background-color: #dddddd;
+  border-radius: 50%;
+  font-weight: bold;
+  margin: 0px 8px 0px;
+  border: none;
+  font-size: 14px;
+}
+
+.shopping-cart-button:hover {
+  background-color: #bbbbbb;
+}
+
+.shopping-cart-total {
+  position: relative;
+  text-align: right;
+}
+
+.shopping-cart-box-buttons {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/***** End Shopping-Cart *****/
+
+
 /***** Index *****/
 
 #home-img{
@@ -131,6 +189,7 @@ main{
   padding: 8px;
   color:white;
   text-decoration: none;
+  font-size: 14px;
 }
 
 .btn:hover{
