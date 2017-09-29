@@ -113,10 +113,33 @@ main{
 }
 
 /***** End Contact *****/
+/***** Index *****/
 
 #home-img{
+  float: right;
   height: 300px;
+  /*position: relative;
+  top:-100px;*/
 }
+
+.btn{
+  background-color: #14597f;
+  border: solid;
+  border-width: 1px;
+  border-color: #0b2d3d;
+  border-radius: 4px;
+  padding: 8px;
+  color:white;
+  text-decoration: none;
+}
+
+.btn:hover{
+  background-color: #1fb5e9;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s
+}
+/***** End Index *****/
+
 
 /***** Footer *****/
 footer{
