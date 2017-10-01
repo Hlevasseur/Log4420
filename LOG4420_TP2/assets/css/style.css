@@ -198,7 +198,7 @@ table.shopping-cart-table .last-column {
   transition-duration: 0.2s
 }
 /***** End Index *****/
-/***** Produits *****/
+/***** Products *****/
 .main-products{
   display: flex;
   flex-direction: row;
@@ -262,12 +262,6 @@ table.shopping-cart-table .last-column {
   margin-left: 10px;
 }
 
-.products-list{
-/*  display: flex;
-  flex-direction: row;
-  justify-content: space-between;*/
-}
-
 .product-card{
 /*  flex-basis: 3O%;*/
   margin: 10px;
@@ -302,17 +296,62 @@ table.shopping-cart-table .last-column {
   margin-right: 5px;
   margin-bottom: 5px;
 }
-/***** End Produits *****/
+/***** End Products *****/
+/***** Product *****/
 
+.product{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.product-info{
+  flex-basis: 50%;
+  justify-content: center;
+}
+.product-img{
+  width: 100%;
+  margin: auto;
+}
+.product-display{
+  flex-basis: 50%;
+  justify-content: center;
+}
+
+.form-control{
+  border:solid;
+  border-color: #999999;
+  border-width: 1px;
+  border-radius: 4px;
+  width: 40px;
+  height: 25px;
+}
+
+.selection-section{
+  border-top: dashed;
+  border-top-width: 1px;
+  border-top-color: #999999;
+}
+.selection-section p{
+  display: inline-block;
+  margin-top: 20px;
+}
+.selection-section form{
+  margin-top: 20px;
+  float: right;
+}
+.product-info h2{
+  font-size: 18px;
+}
+/***** Fin Product *****/
 /***** Footer *****/
 footer{
 	height:70px;
-
   background-color: #eeeeee;
   border-top:solid;
   border-top-width: 1px;
   border-color: #cccccc;
-
   display: flex;
   justify-content: center;
   align-items: center;
