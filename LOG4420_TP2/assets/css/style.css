@@ -357,8 +357,11 @@ table.shopping-cart-table .last-column {
   border-color: #999999;
   border-width: 1px;
   border-radius: 4px;
-  width: 40px;
   height: 25px;
+}
+
+.product-info .form-control{
+  width:40px;
 }
 
 .selection-section{
