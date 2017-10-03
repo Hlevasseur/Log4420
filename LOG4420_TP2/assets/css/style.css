@@ -171,6 +171,39 @@ table.shopping-cart-table .last-column {
 /***** End Shopping-Cart *****/
 
 
+/***** Order *****/
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.order-field {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.left-field {
+  margin-right: 16px;
+}
+
+.payBtn {
+  float: right;
+}
+
+.order-field > label {
+  font-weight: bold;
+}
+
+/***** End Order *****/
+
+
 /***** Index *****/
 
 #home-img{
@@ -252,7 +285,7 @@ table.shopping-cart-table .last-column {
   flex-direction: row;
 }
 .nb-products{
-  text-align: right; 
+  text-align: right;
   flex-basis: 50%;
   margin-right: 20px;
 }
