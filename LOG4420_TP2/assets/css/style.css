@@ -93,12 +93,15 @@ main{
 
 /***** Contact *****/
 
-.contact-content {
-  display: flex;
+.bordered {
   border-style: solid;
   border-color: #999999;
   border-radius: 4px;
   border-width: 1px;
+}
+
+.contact-content {
+  display: flex;
   margin-top: 30px;
   padding: 20px 0px 20px;
 }
@@ -251,22 +254,23 @@ table.shopping-cart-table .last-column {
 }
 
 .btn-filtre-produits{
-  border: solid;
-  border-width: 1px;
-  border-color: #999999;
   display: block;
   height: 35px;
   width: 100%;
   background-color: white;
   text-align: left;
 }
+
 .btn-filtre-produits:first-child{
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 .btn-filtre-produits:last-child{
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.btn-filtre-produits:not(:first-child):not(:last-child){
+  border-radius: 0px;
 }
 .btn-filtre-produits:hover{
   background-color: #f3f3f3;
@@ -296,14 +300,9 @@ table.shopping-cart-table .last-column {
 }
 
 .product-card{
-/*  flex-basis: 3O%;*/
   margin: 10px;
   display: inline-block;
   width: 30%;
-  border:solid;
-  border-width: 1px;
-  border-radius: 4px;
-  border-color: #999999;
   text-decoration: none;
   color:black;
 }
@@ -353,15 +352,13 @@ table.shopping-cart-table .last-column {
 }
 
 .form-control{
-  border:solid;
-  border-color: #999999;
-  border-width: 1px;
-  border-radius: 4px;
   height: 25px;
+  min-width: 100px;
 }
 
 .product-info .form-control{
   width:40px;
+  min-width: 30px;
 }
 
 .selection-section{
