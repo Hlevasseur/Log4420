@@ -8,6 +8,17 @@ body{
   flex-direction: column;
 
 }
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
 /***** Header *****/
 header{
 	width:100%;
@@ -176,17 +187,7 @@ table.shopping-cart-table .last-column {
 
 /***** Order *****/
 
-.flex {
-  display: flex;
-}
-
-.column {
-  flex-direction: column;
-}
-
 .order-field {
-  display: flex;
-  flex-direction: column;
   flex-basis: 50%;
   margin-top: 5px;
   margin-bottom: 10px;
@@ -332,8 +333,6 @@ table.shopping-cart-table .last-column {
 /***** Product *****/
 
 .product{
-  display: flex;
-  flex-direction: row;
   margin-bottom: 10px;
   margin-top: 10px;
 }

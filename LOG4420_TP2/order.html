@@ -35,23 +35,23 @@
       <form id="order-form" action="./confirmation.html" method="post">
         <section>
           <h2>Contact</h2>
-          <div class="flex column">
-            <div class="flex">
-              <div class="order-field left-field">
+          <div class="col">
+            <div class="row">
+              <div class="col order-field left-field">
                 <label for="first-name">Prénom</label>
                 <input id="first-name" class="form-control bordered" name="first-name" type="text" placeholder="Prénom" required>
               </div>
-              <div class="order-field">
+              <div class="col order-field">
                 <label for="last-name">Nom</label>
                 <input id="last-name" class="form-control bordered" name="last-name" type="text" placeholder="Nom" required>
               </div>
             </div>
-            <div class="flex">
-              <div class="order-field left-field">
+            <div class="row">
+              <div class="col order-field left-field">
                 <label for="email">Adresse courriel</label>
                 <input id="email" class="form-control bordered" name="email" type="email" placeholder="Adresse courriel" required>
               </div>
-              <div class="order-field">
+              <div class="col order-field">
                 <label for="phone">Téléphone</label>
                 <input id="phone" class="form-control bordered" name="phone" type="tel" placeholder="###-###-####" required>
               </div>
@@ -60,12 +60,12 @@
         </section>
         <section>
           <h2>Paiement</h2>
-          <div class="flex">
-            <div class="order-field left-field">
+          <div class="row">
+            <div class="col order-field left-field">
               <label for="credit-card">Numéro de carte de crédit</label>
               <input id="credit-card" class="form-control bordered" name="credit-card" type="text" placeholder="•••• •••• •••• ••••" required>
             </div>
-            <div class="order-field">
+            <div class="col order-field">
               <label for="credit-card-expiry">Expiration (mm/aa)</label>
               <input id="credit-card-expiry" class="form-control bordered" name="credit-card-expiry" type="text" placeholder="mm/aa" required>
             </div>
