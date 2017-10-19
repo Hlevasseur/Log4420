@@ -1,0 +1,390 @@
+body{
+  width:100%;
+  margin:0px;
+  font-family: sans-serif;
+
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+/***** Header *****/
+header{
+	width:100%;
+	height:60px;
+	background-color:#14597f;
+  border-bottom: solid;
+  border-bottom-color: #0b2d3d;
+  border-bottom-width: 1px;
+
+}
+
+.header-content {
+  padding-left:20px;
+	padding-right:20px;
+  height: inherit;
+  margin: auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.active{
+  background-color: #1fb5e9;
+  border-radius: 4px;
+}
+
+/* Logo */
+.header-content > a {
+  display: flex;
+	align-items: flex-end;
+}
+.header-content > a > img{
+  margin-top:auto;
+  margin-bottom:auto;
+  height: 50px;
+}
+
+.header-content > nav {
+	align-items: flex-end;
+}
+
+nav ul{
+  display: flex;
+  list-style-type: none;
+}
+
+nav li{
+  float: left;
+  display: flex;
+  align-items: center;
+}
+nav li a{
+  padding: 8px;
+  color: white;
+  text-decoration: none;
+}
+
+nav .fa-shopping-cart{
+  color: #14597f;
+}
+.count{
+  background-color:#d9534f;
+  border-radius: 50%;
+  display: inline-block;
+  padding-left:5px;
+  padding-right:5px;
+  position: relative;
+  top:10px;
+  right:15px;
+}
+/***** Main *****/
+main{
+  width: inherit;
+	max-width:1200px;
+	padding-left:20px;
+	padding-right:20px;
+  flex: 1;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+/***** Contact *****/
+
+.bordered {
+  border-style: solid;
+  border-color: #999999;
+  border-radius: 4px;
+  border-width: 1px;
+}
+
+.contact-content {
+  display: flex;
+  margin-top: 30px;
+  padding: 20px 0px 20px;
+}
+
+.contact-content > section {
+  flex-basis: 33%;
+  text-align: center;
+}
+
+.contact-content > section .fa {
+  margin-bottom: 8px;
+}
+
+/***** End Contact *****/
+
+
+/***** Shopping-Cart *****/
+
+table.shopping-cart-table {
+  text-align: left;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.shopping-cart-table thead {
+  border-bottom: 1px solid black;
+}
+
+table.shopping-cart-table tbody {
+  border-bottom: 1px solid black;
+}
+
+table.shopping-cart-table .first-column {
+  height: 35px;
+  width: 30px;
+  box-sizing: border-box;
+}
+
+table.shopping-cart-table .last-column {
+  text-align: right;
+}
+
+.shopping-cart-button {
+  width: 23px;
+  height: 23px;
+  background-color: #dddddd;
+  border-radius: 50%;
+  font-weight: bold;
+  margin: 0px 8px 0px;
+  border: none;
+  font-size: 14px;
+}
+
+.shopping-cart-button:hover {
+  background-color: #bbbbbb;
+}
+
+.shopping-cart-total {
+  position: relative;
+  text-align: right;
+}
+
+.shopping-cart-box-buttons {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/***** End Shopping-Cart *****/
+
+
+/***** Order *****/
+
+.order-field {
+  flex-basis: 50%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.left-field {
+  margin-right: 16px;
+}
+
+.payBtn {
+  float: right;
+}
+
+.order-field > label {
+  font-weight: bold;
+}
+
+/***** End Order *****/
+
+
+/***** Index *****/
+
+#home-img{
+  float: right;
+  height: 300px;
+  /*position: relative;
+  top:-100px;*/
+}
+
+.btn{
+  background-color: #14597f;
+  border: solid;
+  border-width: 1px;
+  border-color: #0b2d3d;
+  border-radius: 4px;
+  padding: 8px;
+  color:white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn:hover{
+  background-color: #1fb5e9;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s
+}
+/***** End Index *****/
+/***** Products *****/
+.main-products{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.side-barre{
+  flex-basis: 20%;
+}
+.products{
+  flex-basis: 75%;
+}
+
+.side-barre h2{
+  font-size: 15px;
+}
+
+.btn-filtre-produits{
+  display: block;
+  height: 35px;
+  width: 100%;
+  background-color: white;
+  text-align: left;
+}
+
+.btn-filtre-produits:first-child{
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.btn-filtre-produits:last-child{
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.btn-filtre-produits:not(:first-child):not(:last-child){
+  border-radius: 0px;
+}
+.btn-filtre-produits:hover{
+  background-color: #f3f3f3;
+  transition-timing-function: ease-out;
+  transition-delay: 0.2s;
+}
+.button-group button:not(:last-child){
+  border-bottom: none;
+}
+.selected{
+  background-color: #ddf2fb;
+}
+
+.title-band{
+  display: flex;
+  flex-direction: row;
+}
+.nb-products{
+  text-align: right;
+  flex-basis: 50%;
+  margin-right: 20px;
+}
+.title-band h1{
+  flex-basis: 50%;
+  margin-top: 16px;
+  margin-left: 10px;
+}
+
+.product-card{
+  margin: 10px;
+  display: inline-block;
+  width: 30%;
+  text-decoration: none;
+  color:black;
+}
+
+.product-card:hover{
+  background-color: #f3f3f3;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2;
+}
+
+.product-card h2{
+  margin-top:5px;
+  margin-left: 5px;
+  font-size: 18px;
+}
+
+.product-card img{
+  width: 80%;
+}
+
+.product-card p{
+  text-align: right;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+/***** End Products *****/
+/***** Product *****/
+
+.product{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.product-info{
+  flex-basis: 50%;
+  justify-content: center;
+}
+.product-img{
+  width: 100%;
+  margin: auto;
+}
+.product-display{
+  flex-basis: 50%;
+  justify-content: center;
+}
+
+.form-control{
+  height: 25px;
+  min-width: 100px;
+}
+
+.product-info .form-control{
+  width:40px;
+  min-width: 30px;
+}
+
+.selection-section{
+  border-top: dashed;
+  border-top-width: 1px;
+  border-top-color: #999999;
+}
+.selection-section p{
+  display: inline-block;
+  margin-top: 20px;
+}
+.selection-section form{
+  margin-top: 20px;
+  float: right;
+}
+.product-info h2{
+  font-size: 18px;
+}
+/***** Fin Product *****/
+/***** Footer *****/
+footer{
+	height:70px;
+  background-color: #eeeeee;
+  border-top:solid;
+  border-top-width: 1px;
+  border-color: #cccccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
