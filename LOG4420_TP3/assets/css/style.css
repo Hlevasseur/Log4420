@@ -232,7 +232,7 @@ table.shopping-cart-table .last-column {
 .btn:hover{
   background-color: #1fb5e9;
   transition-timing-function: ease-out;
-  transition-duration: 0.2s
+  transition-duration: 0.2s;
 }
 /***** End Index *****/
 /***** Products *****/
@@ -276,7 +276,7 @@ table.shopping-cart-table .last-column {
 .btn-filtre-produits:hover{
   background-color: #f3f3f3;
   transition-timing-function: ease-out;
-  transition-delay: 0.2s;
+  transition-duration: 0.2s;
 }
 .button-group button:not(:last-child){
   border-bottom: none;
