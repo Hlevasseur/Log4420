@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <script type="text/javascript" src="./assets/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="./assets/js/modules/array-module.js" charset="utf-8"></script>
+  <script type="text/javascript" src="./assets/js/modules/products-module.js" charset="utf-8"></script>
   <script type="text/javascript" src="./assets/js/products.js" charset="utf-8"></script>
   <script type="text/javascript" src="./assets/js/header-checker.js" charset="utf-8"></script>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -38,20 +40,20 @@
     <section>
       <h2>Catégories</h2>
       <div class="button-group" id="product-categories">
-        <button class="btn-filtre-produits bordered">Appareils photo</button>
-        <button class="btn-filtre-produits bordered">Consoles</button>
-        <button class="btn-filtre-produits bordered">Écrans</button>
-        <button class="btn-filtre-produits bordered">Ordinateurs</button>
-        <button class="btn-filtre-produits selected bordered">Tous les produits</button>
+        <button class="btn-filtre-produits bordered" name="cameras">Appareils photo</button>
+        <button class="btn-filtre-produits bordered" name="consoles">Consoles</button>
+        <button class="btn-filtre-produits bordered" name="screens">Écrans</button>
+        <button class="btn-filtre-produits bordered" name="computers">Ordinateurs</button>
+        <button class="btn-filtre-produits selected bordered" name="all">Tous les produits</button>
       </div>
     </section>
     <section>
       <h2>Classement</h2>
       <div class="button-group" id="product-criteria">
-        <button class="btn-filtre-produits bordered selected">Prix (bas-haut)</button>
-        <button class="btn-filtre-produits bordered">Prix (haut-bas)</button>
-        <button class="btn-filtre-produits bordered">Nom (A-Z)</button>
-        <button class="btn-filtre-produits bordered">Nom (Z-A)</button>
+        <button class="btn-filtre-produits bordered selected" name="price-cr">Prix (bas-haut)</button>
+        <button class="btn-filtre-produits bordered" name="price-dcr">Prix (haut-bas)</button>
+        <button class="btn-filtre-produits bordered" name="name-cr">Nom (A-Z)</button>
+        <button class="btn-filtre-produits bordered" name="name-dcr">Nom (Z-A)</button>
       </div>
     </section>
   </section>
