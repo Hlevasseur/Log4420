@@ -30,7 +30,7 @@ var ARRAY_MODULE = (function() {
     return array;
   }
 
-  Array.prototype.filterProductsBy = function(category) {
+  Array.prototype.filterProductsByCategory = function(category) {
     let array = this.filter(function(product) {
       if(product.category === category) {
         return product;
@@ -38,5 +38,15 @@ var ARRAY_MODULE = (function() {
     });
     return array;
   }
-  
+
+  Array.prototype.filterProductById = function(id) {
+    let array = this.filter(function(product) {
+      if(product.id === id) {
+        return product;
+      }
+    });
+    console.log(array);
+    return array.length > 0 && array[0];
+  }
+
 })();

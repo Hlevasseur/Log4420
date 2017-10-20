@@ -19,7 +19,7 @@ function applyCriteriaAndCategory(products, criteria, crescent, category) {
 
   var filteredProducts = products;
   if(category !== "all") {
-    filteredProducts = filteredProducts.filterProductsBy(category);
+    filteredProducts = filteredProducts.filterProductsByCategory(category);
   }
   let sortedProducts = filteredProducts.sortProductsBy(criteria, crescent);
   updateProductsView(sortedProducts);
