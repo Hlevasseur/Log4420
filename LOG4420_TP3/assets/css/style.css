@@ -388,3 +388,18 @@ footer{
   justify-content: center;
   align-items: center;
 }
+
+.notification {
+  margin: auto;
+  margin-bottom: 40px;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notification p {
+  color: white;
+}

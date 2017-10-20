@@ -45,7 +45,6 @@ var ARRAY_MODULE = (function() {
         return product;
       }
     });
-    console.log(array);
     return array.length > 0 && array[0];
   }
 

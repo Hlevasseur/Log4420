@@ -1,15 +1,18 @@
 'use strict';
 
 function getCart() {
-  var value = localStorage.getItem("cart");
-  return value && JSON.parse(cart);
+  var cart = localStorage.getItem("cart");
+  return cart && JSON.parse(cart);
 }
 
 function checkCartBadge() {
   $('.shopping-cart > .count').hide();
   if(getCart()) {
     let cart = getCart();
-    let count = cart.products.length;
+    var count = 0;
+    cart.products.forEach(function(product){
+      count += parseInt(product.quantity);
+    });
     if(count > 0) {
       $(".shopping-cart > .count")
         .show()
