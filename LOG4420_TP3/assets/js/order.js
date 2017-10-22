@@ -13,11 +13,11 @@ $(function() {
       // of an input field. Validation rules are defined
       // on the right side
       firstname:{
-        required:"true",
+        required:true,
         minlength:2  
       },
       lastname: {
-        required:"true",
+        required:true,
         minlength:2
       },
       email: {
@@ -55,7 +55,6 @@ $(function() {
       },
       creditCardExpiry:{
         required:"Ce champ est obligatoire",
-        //TODO checkValidité
       },
       creditCard:{
         required:"Ce champ est obligatoire",
@@ -65,6 +64,8 @@ $(function() {
     // Make sure the form is submitted to the destination defined
     // in the "action" attribute of the form when valid
     submitHandler: function(form) {
+      ORDER.AddOrder($('#first-name').val(),$('#last-name').val());
+      CART.flushCart();    
       form.submit();
     }
   });
