@@ -3,6 +3,8 @@
 var CART = (function(){
   var self = {};
 
+  // Private methods
+
   function newCart() {
      return {
        products: []
@@ -13,13 +15,20 @@ var CART = (function(){
     return cart.products.filterProductById(id);
   }
 
-  self.saveCart = function(cart) {
-    localStorage.setItem("cart", JSON.stringify(cart));
+  function saveCart(cart) {
+    LOCAL_STORAGE.setObject("cart", cart);
   }
 
+  // Public Methods
+
+  // Singleton
+  // Always use this methods to access the cart
   self.getCart = function() {
-    var cart = localStorage.getItem("cart");
-    return cart && JSON.parse(cart);
+    var cart = LOCAL_STORAGE.getObject("cart");
+    if(!cart) {
+      cart = newCart();
+    }
+    return cart;
   }
 
   self.addProductToCart = function(product, qty) {
@@ -41,7 +50,16 @@ var CART = (function(){
       let count = parseInt(dataProduct.quantity) + parseInt(qty);
       dataProduct.quantity = count.toString();
     }
-    self.saveCart(cart);
+    saveCart(cart);
+  }
+
+  self.getProductsCount = function() {
+    let cart = self.getCart();
+    var count = 0;
+    cart.products.forEach(function(product){
+      count += parseInt(product.quantity);
+    });
+    return count;
   }
 
   return self;
