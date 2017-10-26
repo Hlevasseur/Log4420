@@ -2,7 +2,7 @@ $(document).ready(function() {
 
    jQuery.validator.addMethod("datecreditCardExpiry", function(value, element) {
     return this.optional(element) || /^(0[1-9]|1[0-2])\/[0-9]{2}\b/.test( value );
-  }, "La date d’expiration de votre carte de crédit est invalide.");
+  }, "La date d'expiration de votre carte de crédit est invalide.");
 
   // Initialize form validation on the registration form.
   // It has the name attribute "registration"
