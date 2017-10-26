@@ -37,30 +37,6 @@ $(document).ready(function() {
         creditcard:true
       }
     },
-    // Specify validation error messages
-    messages: {
-      firstname:{
-        required:"Ce champ est obligatoire"
-      },
-      lastname:{
-        required:"Ce champ est obligatoire"
-      },
-      phone: {
-        required: "Ce champ est obligatoire",
-        phoneUS: "Utilisez un format américain"
-      },
-      email:{
-        required:"Ce champ est obligatoire",
-        email:"Le format d'email est invalide"
-      },
-      creditCardExpiry:{
-        required:"Ce champ est obligatoire",
-      },
-      creditCard:{
-        required:"Ce champ est obligatoire",
-        creditcard:"Le format de carte de crédit est invalide"
-      }
-    },
     // Make sure the form is submitted to the destination defined
     // in the "action" attribute of the form when valid
     submitHandler: function(form) {
