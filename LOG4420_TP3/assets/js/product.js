@@ -9,7 +9,7 @@ function updateView(product) {
   product.features.forEach(function(feature){
     $('#product-features').append('<li>'+feature+'</li>');
   });
-  $('#product-price').append('Prix: <strong>' + product.price + '&thinsp;$</strong>');
+  $('#product-price').append(product.price.toString());
 }
 
 function displayNotification() {
@@ -28,7 +28,7 @@ $(document).ready(function() {
     if(!data) {
       $('main > article')
         .empty()
-        .append('<h1>Page non trouvée !</h1>');
+        .append('<h1>Page non trouvée!</h1>');
     } else {
       product = data;
       updateView(product);
