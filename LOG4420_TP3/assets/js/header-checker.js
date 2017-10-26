@@ -1,10 +1,10 @@
 'use strict';
 
 function checkCartBadge() {
-  $('.shopping-cart > .count').hide();
+  $('#products-count').hide();
   var count = CART.getProductsCount();
   if(count > 0) {
-    $(".shopping-cart > .count")
+    $("#products-count")
       .show()
       .text(count);
   }
