@@ -9,7 +9,7 @@ function updateView(product) {
   product.features.forEach(function(feature){
     $('#product-features').append('<li>'+feature+'</li>');
   });
-  $('#product-price').append(product.price.toString());
+  $('#product-price').append(product.price.toCurrencyString());
 }
 
 function displayNotification() {

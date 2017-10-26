@@ -1,6 +1,6 @@
 'use strict';
 
-var ARRAY_MODULE = (function() {
+var TOOLS = (function() {
 
   Array.prototype.sortProductsBy = function(criteria, crescent) {
     let array = this;
@@ -46,6 +46,14 @@ var ARRAY_MODULE = (function() {
       }
     });
     return array.length > 0 && array[0];
+  }
+
+  Number.prototype.toCurrencyString = function() {
+    return this.toString().replace(/[.]/g , ",");
+  }
+
+  String.prototype.toCurrencyString = function() {
+    return this.replace(/[.]/g , ",");
   }
 
 })();

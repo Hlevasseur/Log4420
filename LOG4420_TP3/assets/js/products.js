@@ -9,7 +9,7 @@ function updateProductsView(products) {
       "<a class='product-card bordered' href='./product.html?id=" + product.id + "' title='En savoir plus...'>" +
         "<h2>" + product.name + "</h2>" +
         "<img alt=" + product.name + " src=/assets/img/" + product.image + ">" +
-        "<p><small>Prix</small> " + product.price + "&thinsp;$</p>" +
+        "<p><small>Prix</small> " + product.price.toCurrencyString() + "&thinsp;$</p>" +
       "</a>"
     )
   });
