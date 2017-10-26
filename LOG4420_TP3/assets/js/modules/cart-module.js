@@ -34,7 +34,7 @@ var CART = (function(){
   self.flushCart=function() {
     saveCart(newCart());
   }
-  
+
   self.addProductToCart = function(product, qty) {
     var cart = self.getCart();
     if(!cart) {
@@ -66,38 +66,40 @@ var CART = (function(){
     return count;
   }
 
-    self.addOneQuantityToCart = function(id){
-        var cart = self.getCart();
-        if(cart){
-            let dataProduct = getProductFromCart(cart, id);
-           
-            let count = parseInt(dataProduct.quantity) + 1;
+  self.addOneQuantityToCart = function(id){
+      var cart = self.getCart();
+      if(cart){
+          let dataProduct = getProductFromCart(cart, id);
+
+          let count = parseInt(dataProduct.quantity) + 1;
+          dataProduct.quantity = count.toString();
+          saveCart(cart);
+      }
+
+    }
+
+  self.removeOneQuantityToCart = function(id){
+    var cart = self.getCart();
+    if(cart){
+        let dataProduct = getProductFromCart(cart, id);
+        if(dataProduct.quantity>1){
+            let count = parseInt(dataProduct.quantity) - 1;
             dataProduct.quantity = count.toString();
-            saveCart(cart);
         }
-       
+        saveCart(cart);
     }
-    self.removeOneQuantityToCart = function(id){
-        var cart = self.getCart();
-        if(cart){
-            let dataProduct = getProductFromCart(cart, id);
-            if(dataProduct.quantity>1){
-                let count = parseInt(dataProduct.quantity) - 1;
-                dataProduct.quantity = count.toString();
-            }
-            saveCart(cart);
-        }
-    }
-    self.removeProductFromCart = function(id){
-        var cart = self.getCart();
-        if(cart){
-            var product = getProductFromCart(cart, id)
-            if(product){
-                cart.products.splice($.inArray(product, cart.products),1);
-                saveCart(cart);
-            }
-          
-        }
+  }
+  
+  self.removeProductFromCart = function(id){
+      var cart = self.getCart();
+      if(cart){
+          var product = getProductFromCart(cart, id)
+          if(product){
+              cart.products.splice($.inArray(product, cart.products),1);
+              saveCart(cart);
+          }
+
+      }
     }
     return self;
 })();
