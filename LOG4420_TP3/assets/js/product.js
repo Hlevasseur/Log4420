@@ -35,7 +35,7 @@ $(document).ready(function() {
     }
   });
 
-  $('#add-to-cart-form').form(function(event){
+  $('#add-to-cart-form').submit(function(event){
     event.preventDefault();
     let qty = $('#product-quantity').val();
     CART.addProductToCart(product, qty);
