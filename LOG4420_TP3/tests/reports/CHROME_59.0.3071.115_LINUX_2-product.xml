@@ -5,9 +5,9 @@
 
   <testsuite name="2-product"
     errors="0" failures="0" hostname="" id="" package="2-product" skipped="0"
-    tests="3" time="7.881" timestamp="Fri, 27 Oct 2017 18:39:18 GMT">
+    tests="3" time="7.828" timestamp="Fri, 27 Oct 2017 18:48:19 GMT">
   
-    <testcase name="Page d'un produit" classname="2-product" time="1.661" assertions="5">
+    <testcase name="Page d'un produit" classname="2-product" time="1.613" assertions="5">
 
     
 
@@ -20,14 +20,14 @@
     
     </testcase>
   
-    <testcase name="Produit invalide" classname="2-product" time="0.3350" assertions="2">
+    <testcase name="Produit invalide" classname="2-product" time="0.2940" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Ajout de produits dans le panier" classname="2-product" time="5.885" assertions="8">
+    <testcase name="Ajout de produits dans le panier" classname="2-product" time="5.921" assertions="8">
 
     
 
