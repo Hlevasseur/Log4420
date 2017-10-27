@@ -51,6 +51,7 @@ function validateShoppingCartTable(client, productsList) {
 
       // Check if the "X" button is present.
       client.elementIdElement(v.ELEMENT, "css selector", config.elements.removeItemButton, function(result) {
+        console.log(result);
         assert.equal(result.state, "success", "Le bouton 'X' pour le produit '" + product.name +
           "' doit être présent.");
       });
@@ -84,6 +85,7 @@ function validateShoppingCartTable(client, productsList) {
       client.elementIdElement(v.ELEMENT, "css selector", config.elements.price, function(result) {
         client.elementIdText(result.value.ELEMENT, function(result) {
           var expectedValue = utils.getFormattedPrice(product.price * product.quantity);
+          console.log(expectedValue);
           assert.ok(result.value.indexOf(expectedValue) !== -1, "Le prix pour le produit '" + product.name
             + "' doit être " + expectedValue + "$.");
         });

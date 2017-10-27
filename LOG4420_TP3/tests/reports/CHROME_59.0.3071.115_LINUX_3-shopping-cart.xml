@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="5"
+            tests="6">
+
+  <testsuite name="3-shopping-cart"
+    errors="0" failures="5" hostname="" id="" package="3-shopping-cart" skipped="0"
+    tests="6" time="4.388" timestamp="Fri, 27 Oct 2017 18:39:26 GMT">
+  
+    <testcase name="Aucun produit dans le panier" classname="3-shopping-cart" time="1.431" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Un ou plusieurs produits dans le panier" classname="3-shopping-cart" time="1.478" assertions="1">
+
+    <failure message="AssertionError: Le prix pour le produit 'Console Xbox One' doit être 799,98$. - expected &quot;true&quot; but got: &quot;false&quot;">    at Object.&lt;anonymous&gt; (/usagers/frbei/Documents/Log4420/LOG4420_TP3/tests/e2e/3-shopping-cart.js:89:18)</failure>
+    </testcase>
+  
+    <testcase name="Suppression d'un item dans le panier" classname="3-shopping-cart" time="0.3520" assertions="1">
+
+    <failure message="AssertionError: Le prix pour le produit 'Console Xbox One' doit être 799,98$. - expected &quot;true&quot; but got: &quot;false&quot;">    at Object.&lt;anonymous&gt; (/usagers/frbei/Documents/Log4420/LOG4420_TP3/tests/e2e/3-shopping-cart.js:89:18)</failure>
+    </testcase>
+  
+    <testcase name="Augmentation de la quantite associee a un item dans le panier" classname="3-shopping-cart" time="0.3670" assertions="1">
+
+    <failure message="AssertionError: Le prix pour le produit 'Console Xbox One' doit être 1199,97$. - expected &quot;true&quot; but got: &quot;false&quot;">    at Object.&lt;anonymous&gt; (/usagers/frbei/Documents/Log4420/LOG4420_TP3/tests/e2e/3-shopping-cart.js:89:18)</failure>
+    </testcase>
+  
+    <testcase name="Diminution de la quantite associee a un item dans le panier" classname="3-shopping-cart" time="0.3910" assertions="1">
+
+    <failure message="AssertionError: Le prix pour le produit 'Console Xbox One' doit être 799,98$. - expected &quot;true&quot; but got: &quot;false&quot;">    at Object.&lt;anonymous&gt; (/usagers/frbei/Documents/Log4420/LOG4420_TP3/tests/e2e/3-shopping-cart.js:89:18)</failure>
+    </testcase>
+  
+    <testcase name="Suppression de tous les produits dans le panier" classname="3-shopping-cart" time="0.3690" assertions="1">
+
+    <failure message="AssertionError: Le prix pour le produit 'Console Xbox One' doit être 799,98$. - expected &quot;true&quot; but got: &quot;false&quot;">    at Object.&lt;anonymous&gt; (/usagers/frbei/Documents/Log4420/LOG4420_TP3/tests/e2e/3-shopping-cart.js:89:18)</failure>
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>
