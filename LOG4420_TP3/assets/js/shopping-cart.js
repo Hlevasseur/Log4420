@@ -6,7 +6,7 @@ function updateDisplayCart(){
     }else{
         shopingItems.products.sortProductsBy("name",true).forEach(function(product){
             sum+= product.price*product.quantity;
-            $('.shopping-cart-total strong').html(sum.toFixed(2).toCurrencyString()+"&thinsp;$")  ;
+            $('.shopping-cart-total strong').html(sum.toFixed(2).toCurrencyString()+"&thinsp;$");
         });
     }
 }
@@ -51,11 +51,11 @@ $(document).ready(function() {
 
     $('.add-quantity-button').click(function(){
         var id = $(this).parent().parent().data("id");
-        CART.addOneQuantityToCart(id);
+        let product = CART.addOneQuantityToCart(id);
         checkCartBadge();
         updateDisplayCart();
-        qty = parseInt($(this).parent().find(".quantity").text())+1;
-        price = parseFloat($(this).parent().parent().find(".price").text().slice(0,$(this).parent().parent().find(".price").text().length -1));
+        qty = product.quantity;
+        price = product.price;
         $(this).parent().find(".remove-quantity-button").prop('disabled',false);
         $(this).parent().find(".quantity").text(qty);
         $(this).parent().parent().find(".total-amount").text((qty*price).toFixed(2).toCurrencyString()+" $");
@@ -65,11 +65,11 @@ $(document).ready(function() {
 
     $('.remove-quantity-button').click(function(){
         var id = $(this).parent().parent().data("id");
-        CART.removeOneQuantityToCart(id);
+        let product = CART.removeOneQuantityToCart(id);
         checkCartBadge();
         updateDisplayCart();
-        qty = parseInt($(this).parent().find(".quantity").text())-1;
-        price = parseFloat($(this).parent().parent().find(".price").text().slice(0,$(this).parent().parent().find(".price").text().length -1));
+        qty = product.quantity;
+        price = product.price;
         $(this).parent().find(".quantity").text(qty);
         if(qty==1){
             $(this).prop('disabled', true);

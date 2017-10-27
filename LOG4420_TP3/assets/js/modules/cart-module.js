@@ -74,6 +74,7 @@ var CART = (function(){
           let count = parseInt(dataProduct.quantity) + 1;
           dataProduct.quantity = count.toString();
           saveCart(cart);
+          return dataProduct;
       }
 
     }
@@ -87,9 +88,10 @@ var CART = (function(){
             dataProduct.quantity = count.toString();
         }
         saveCart(cart);
+        return dataProduct;
     }
   }
-  
+
   self.removeProductFromCart = function(id){
       var cart = self.getCart();
       if(cart){
