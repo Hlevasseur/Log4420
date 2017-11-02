@@ -10,7 +10,7 @@ var ORDER = (function(){
        lastname:LASTNAME
      };
   }
-  
+
   self.saveOrder = function(order) {
     localStorage.setItem("order", JSON.stringify(order));
   }

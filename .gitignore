@@ -1,3 +1,4 @@
 .editorconfig
 node_modules
-
+LOG4420_TP3/tests/reports/
+LOG4420_TP3/tests/bin/*

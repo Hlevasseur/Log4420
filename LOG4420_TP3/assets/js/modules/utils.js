@@ -1,6 +1,6 @@
 'use strict';
 
-var TOOLS = (function() {
+var UTILS = (function() {
 
   Array.prototype.sortProductsBy = function(criteria, crescent) {
     let array = this;
