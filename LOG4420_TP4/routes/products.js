@@ -14,13 +14,19 @@ router
       response.json(products);
     });
   })
+  .post('/', function(request, response) {
+    var params = request.body;
+    Product.createProduct(params, function(statusCode) {
+      response.sendStatus(statusCode);
+    });
+  })
   .get('/:id', function(request, response) {
     var id = request.params.id;
-    if(!id) {
-      response.sendStatus(400);
-      return;
-    }
-    Product.getProduct(id, function(product){
+    Product.getProduct(id, function(errorCode, product) {
+      if(error) {
+        response.sendStatus(errorCode);
+        return;
+      }
       response.json(product);
     });
   });

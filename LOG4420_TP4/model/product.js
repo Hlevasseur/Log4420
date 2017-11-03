@@ -17,11 +17,16 @@ var Product = module.exports = mongoose.model("Product", new Schema({
 
 // Get product by id
 module.exports.getProduct = function(id, callback) {
+  id = parseInt(id);
+  if(!id) {
+    callback(400);
+    return;
+  }
   Product.findOne({ id: id }, function(error, product) {
     if(error) {
       throw error;
     }
-    callback(product);
+    callback(null, product);
   });
 }
 
@@ -56,6 +61,68 @@ module.exports.getProducts = function(category, criteria, callback) {
     callback(null, prod);
   });
 }
+
+module.exports.createProduct = function(param, callback) {
+  var id = parseInt(param.id);
+  var name = param.name;
+  var price = parseFloat(param.price);
+  var image = param.image;
+  var category = param.category;
+  var description = param.description;
+  var features = param.features;
+
+  // Check if all params are given
+  if(!id || !name || !price || !image || !category  || !description || !features || !features.length > 0) {
+    callback(400);
+    return;
+  }
+  // Check if param are valid
+  else if (price <= 0 || typeof name !== 'string' || typeof image !== 'string' || !categoriesAllowed.includes(category) || typeof description !== 'string' || !isAStringArray(features)) {
+    callback(400);
+    return;
+  }
+
+  // Everything is fine, look for product with same id
+  Product.getProduct(id, function(err, product){
+    if(err) {
+      throw err;
+    }
+    if(product) {
+      callback(400);
+      return;
+    }
+    // No product found, we can process creation
+    var product = new Product({
+      id: id,
+      name: name,
+      price: price,
+      image: image,
+      category: category,
+      description: description,
+      features: features
+    });
+    product.save(function(error){
+      if(error) {
+        throw error;
+      }
+      callback(201);
+    });
+  });
+
+}
+
+
+// --------------- Private functions ----------------
+
+// Check is String array
+function isAStringArray(array) {
+  for(i=0; i <i.length; i++) {
+    if(!array[i] || typeof array[i] !== 'string') {
+      return false;
+    }
+  }
+  return array.length > 0;
+};
 
 // Custom get criteria info from query param
 function getCriteriaFromQuery(criteria) {
