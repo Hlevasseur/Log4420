@@ -28,7 +28,14 @@ router
         return;
       }
       response.json(product);
+    });    
+  })
+  .delete('/:id', function(request, response){
+    var id = request.params.id;
+    Product.removeProduct(id, function(statusCode){
+      response.sendStatus(statusCode);
     });
   });
+
 
 module.exports = router;

@@ -108,7 +108,30 @@ module.exports.createProduct = function(param, callback) {
       callback(201);
     });
   });
+}
 
+module.exports.removeProduct = function(id, callback){
+  id = parseInt(id);
+  if(!id) {
+    callback(404);
+    return;
+  }
+  Product.getProduct(id , function(error,product){
+    if(error){
+      throw error;
+    }
+    if(!product){
+      callback(404);
+      return; 
+    }
+    product.remove(function(error){
+      if(error){
+        throw error;
+      }
+      callback(204);
+    });
+    
+  });
 }
 
 
