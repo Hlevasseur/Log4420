@@ -35,6 +35,11 @@ router
     Product.removeProduct(id, function(statusCode){
       response.sendStatus(statusCode);
     });
+  })
+  .delete('/', function(request, response){
+    Product.removeAllProducts(function(statusCode){
+      response.sendStatus(statusCode);
+    });
   });
 
 

@@ -130,10 +130,17 @@ module.exports.removeProduct = function(id, callback){
       }
       callback(204);
     });
-    
   });
 }
 
+module.exports.removeAllProducts = function(callback){
+  Product.remove({}, function(error){
+    if(error){
+      throw error;
+    }   
+    callback(204);
+  });
+}
 
 // --------------- Private functions ----------------
 
