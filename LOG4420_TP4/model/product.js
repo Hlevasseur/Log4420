@@ -70,7 +70,6 @@ module.exports.createProduct = function(param, callback) {
   var category = param.category;
   var description = param.description;
   var features = param.features;
-
   // Check if all params are given
   if(!id || !name || !price || !image || !category  || !description || !features || !features.length > 0) {
     callback(400);
@@ -110,20 +109,26 @@ module.exports.createProduct = function(param, callback) {
   });
 }
 
+// Remove product by id
 module.exports.removeProduct = function(id, callback){
   id = parseInt(id);
+  
+  //if the id is not a int
   if(!id) {
     callback(404);
     return;
   }
+  // find the product
   Product.getProduct(id , function(error,product){
     if(error){
       throw error;
     }
+    // if it does not exist
     if(!product){
       callback(404);
       return; 
     }
+    // if it exists, we remove it
     product.remove(function(error){
       if(error){
         throw error;
@@ -133,6 +138,7 @@ module.exports.removeProduct = function(id, callback){
   });
 }
 
+// Remove all the products of the data base
 module.exports.removeAllProducts = function(callback){
   Product.remove({}, function(error){
     if(error){

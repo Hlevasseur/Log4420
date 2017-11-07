@@ -9,6 +9,8 @@ var session = require("express-session");
 require("./lib/db");
 var index = require("./routes/index");
 var products = require('./routes/products');
+var orders = require('./routes/orders');
+var shopping_cart = require('./routes/shopping-cart');
 var app = express();
 
 // view engine setup
@@ -36,6 +38,8 @@ app.use(session({
 
 app.use("/", index);
 app.use('/api/products', products);
+app.use('/api/orders', orders);
+app.use('/api/shopping-cart',shopping_cart)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
