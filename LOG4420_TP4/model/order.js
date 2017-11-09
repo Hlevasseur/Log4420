@@ -37,6 +37,43 @@ module.exports.getOrders = function(callback) {
   });
 }
 
+module.exports.removeAllOrder = function(callback){
+  Order.remove({}, function(error){
+    if(error){
+      throw error;
+    }   
+    callback(204);
+  });
+}
+
+module.exports.removeOrder = function(id, callback){
+  console.log("remove order "+ id);
+  id = parseInt(id);
+  if(!id){
+    console.log("mauvais id ");
+    callback(404);
+    return;
+  }
+  Order.getOrder(id,function(error,order){
+    if(error){
+      throw error;
+    }
+    // if it does not exist
+    console.log(order);
+    console.log("!order "+!order)
+    if(!order){
+      callback(404);
+      return; 
+    }
+    order.remove(function(error){
+      if(error){
+        throw error;
+      }
+      callback(200);
+      return;
+    });
+  });
+}
 module.exports.createOrder = function(param, callback) {
   var id = parseInt(param.id);
   var firstName = param.firstName;

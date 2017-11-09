@@ -15,7 +15,7 @@ router
   .get('/:id', function(request, response) {
     var id = request.params.id;
     Order.getOrder(id, function(errorCode, order) {
-      if(error) {
+      if(errorCode) {
         response.sendStatus(errorCode);
         return;
       }
@@ -28,6 +28,19 @@ router
       response.sendStatus(statusCode);
     });
   })
+  .delete('/:id',function(request,response){
+    console.log("delete "+request.params.id);
+    var id = request.params.id;
+    Order.removeOrder(id,function(statusCode){
+      response.sendStatus(statusCode);
+    })
+  })
+  .delete('/', function(request, response){
+    console.log("delete all ");
+    Order.removeAllOrder(function(statusCode){
+            response.sendStatus(statusCode);
+    });
+  });
 
 
 module.exports = router;
