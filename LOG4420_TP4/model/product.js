@@ -33,6 +33,8 @@ module.exports.getProduct = function(id, callback) {
 // Get products
 module.exports.getProducts = function(category, criteria, callback) {
   // Var test
+  if(!criteria) { criteria = ""; }
+  if(!category) { category = ""; }
   if(!categoriesAllowed.includes(category) || !criteriasAllowed.includes(criteria)) {
     callback(400);
     return;
@@ -112,7 +114,7 @@ module.exports.createProduct = function(param, callback) {
 // Remove product by id
 module.exports.removeProduct = function(id, callback){
   id = parseInt(id);
-  
+
   //if the id is not a int
   if(!id) {
     callback(404);
@@ -126,7 +128,7 @@ module.exports.removeProduct = function(id, callback){
     // if it does not exist
     if(!product){
       callback(404);
-      return; 
+      return;
     }
     // if it exists, we remove it
     product.remove(function(error){
@@ -143,7 +145,7 @@ module.exports.removeAllProducts = function(callback){
   Product.remove({}, function(error){
     if(error){
       throw error;
-    }   
+    }
     callback(204);
   });
 }
