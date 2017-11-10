@@ -41,7 +41,7 @@ module.exports.getProductsById = function(ids, callback) {
       throw error;
     }
     callback(products);
-  });  
+  });
 }
 
 // Get products
@@ -98,12 +98,14 @@ module.exports.createProduct = function(param, callback) {
   }
 
   // Everything is fine, look for product with same id
-  Product.getProduct(id, function(err, product){
-    if(err) {
-      throw err;
+  Product.getProduct(id, function(errorCode, prod){
+    if(errorCode && errorCode !== 404) {
+      return callback(errorCode);
     }
-    if(product) {
+    console.log(prod);
+    if(prod) {
       callback(400);
+      console.log('produit existant');
       return;
     }
     // No product found, we can process creation
@@ -135,9 +137,9 @@ module.exports.removeProduct = function(id, callback){
     return;
   }
   // find the product
-  Product.getProduct(id , function(error,product){
-    if(error){
-      throw error;
+  Product.getProduct(id , function(errorCode,product){
+    if(errorCode){
+      return callback(errorCode);
     }
     // if it does not exist
     if(!product){
@@ -168,7 +170,7 @@ module.exports.removeAllProducts = function(callback){
 
 // Check is String array
 function isAStringArray(array) {
-  for(i=0; i <i.length; i++) {
+  for(i=0; i < array.length; i++) {
     if(!array[i] || typeof array[i] !== 'string') {
       return false;
     }

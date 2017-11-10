@@ -15,10 +15,16 @@ var Order = module.exports = mongoose.model("Order", new Schema({
 // Get order by id
 module.exports.getOrder = function(idStr, callback) {
   var id = parseInt(idStr);
-  if(!id) { return callback(404); }
+  if(!id) {
+    callback(404);
+    return;
+  }
   Order.findOne({ id: id }, function(error, order) {
-    if(error || !order) { return callback(404); }
-    return callback(null, order);
+    if(error || !order) {
+      callback(404);
+      return;
+    }
+    callback(null, order);
   });
 }
 
@@ -48,9 +54,9 @@ module.exports.removeOrder = function(idStr, callback){
     callback(404);
     return;
   }
-  Order.getOrder(id,function(error,order){
-    if(error){
-      throw error;
+  Order.getOrder(id,function(errorCode,order){
+    if(errorCode){
+      return callback(errorCode);
     }
     // if it does not exist
     if(!order){
@@ -91,13 +97,12 @@ module.exports.createOrder = function(param, callback) {
       return;
     }
     // Everything is fine, look for order with same id
-    Order.getOrder(id, function(err, order){
-      if(err) {
-        throw err;
+    Order.getOrder(id, function(errCode, order){
+      if(errCode && errCode != 404) {
+        return callback(errCode);
       }
       if(order) {
-        callback(400);
-        return;
+        return callback(400);
       }
       // No product found, we can process creation
       var order = new Order({
@@ -152,7 +157,7 @@ function isAProductArray(array, callback) {
 
 // Check if the email is correct
 function isEmail(string){
-  var patt = new RegExp("^[a-zA-Z_.0-9]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$");
+  var patt = new RegExp("^[a-zA-Z_.-0-9]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$");
   return patt.exec(string);
 };
 
