@@ -1,23 +1,23 @@
 var Product = require('./product');
 
-var ShoppingCart = module.exports = function() {
+var ShoppingCart = module.exports = function(session) {
   this.products = new Array();
+  if(session) { this.getCartFromSession(session); }
 };
 
 
 ShoppingCart.prototype.getProduct = function (id, callback) {
   if(!id) {
-    callback(404);
-    return;
+    return null;
   }
   // Check if product exists
-  Product.getProduct(id, function(errorCode, product){
-    if(errorCode) {
-      callback(errorCode);
-      return;
+  var product;
+  this.products.forEach(function(p) {
+    if(p.productId === id) {
+      product = p;
     }
-    callback(null, product);
   });
+  return product;
 };
 
 ShoppingCart.prototype.addProduct = function(id, qty, callback) {
@@ -55,43 +55,40 @@ ShoppingCart.prototype.addProduct = function(id, qty, callback) {
   });
 };
 
-ShoppingCart.prototype.updateProduct = function (id, qty) {
+ShoppingCart.prototype.updateProduct = function (id, qty, callback) {
   // var checking
-  // No need to check id, getProduct will do it
   var quantity = parseInt(qty);
-  if(!quantity || quantity <= 0) {
-    callback(400);
-    return;
-  }
+  if(!quantity || quantity <= 0) { return callback(400); }
 
-  var self = this;
-  // Check if product exists
-  Product.getProduct(id, function(errorCode, product){
-    if(errorCode) {
-      callback(errorCode);
-      return;
+  var product;
+  this.products.forEach(function(p) {
+    if(p.productId === id) {
+      product = p;
+      p.quantity = quantity;
     }
-    // Product exists, can proceed
-    self.products.forEach(function(product) {
-      if(product.id === id) { product.quantity = quantity; }
-    });
-    callback(null, self);
   });
+  if(!product) { return callback(404); }
+  callback(null, this);
 };
 
 ShoppingCart.prototype.deleteProduct = function (id, callback) {
-  var self = this;
   // Check if product exists
-  Product.getProduct(id, function(errorCode, product){
-    if(errorCode) {
-      callback(errorCode);
-      return;
-    }
-    // Product exists, can proceed
-    self.products.filter(function(product) {
-      if(product.id !== id) { return product; }
-    });
+  var inCart = false
+  this.products.forEach(function(p) {
+    if(p.productId === id) { inCart = true; }
   });
+
+  // Check if id already in cart
+  if(!inCart) {
+    callback(404);
+  }
+  // Product exists, can proceed
+  var prod = new Array();
+  this.products.forEach(function(p) {
+    if(p.productId !== id) { prod.push(p); }
+  });
+  this.products = prod;
+  callback(null, this);
 };
 
 ShoppingCart.prototype.deleteCart = function () {
