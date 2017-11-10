@@ -1,7 +1,37 @@
 doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/css/style.css')
+html(lang='fr')
+  block head
+    meta(charset='UTF-8')
+    link(rel='stylesheet', type='text/css', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+    link(rel='stylesheet', type='text/css', href='../css/style.css')
+    script(type='text/javascript', src='../scripts/jquery-3.2.1.min.js')
+    script(type='text/javascript', src='../scripts/modules/utils.js', charset='utf-8')
+    script(type='text/javascript', src='../scripts/modules/products-module.js', charset='utf-8')
+    script(type='text/javascript', src='../scripts/modules/local-storage-module.js', charset='utf-8')
+    script(type='text/javascript', src='../scripts/modules/cart-module.js', charset='utf-8')
+    script(type='text/javascript', src='../scripts/modules/url-module.js', charset='utf-8')
+    script(type='text/javascript', src='../scripts/header-checker.js', charset='utf-8')
+    title #{title}
   body
+    header
+      .header-content
+        a(href='./index.html')
+          img(alt='logo', src='../img/logo.svg', title='Accueil')
+        nav
+          ul
+            li
+              a(class={active: page =='index'})(href='./index.html') Accueil
+            li
+              a(class={active: page =='produits' || page=='produit'})(href='./products.html') Produits
+            li
+              a(class={active: page =='contact'})(href='./contact.html') Contact
+            li
+              a(class={active: page =='cart'}).shopping-cart(href='./shopping-cart.html', title='Panier')
+                span.fa-stack.fa-lg
+                  i.fa.fa-circle.fa-stack-2x.fa-inverse
+                  i.fa.fa-shopping-cart.fa-stack-1x
+                span.count
     block content
+
+    footer
+      p François Beiger et Hubert Levasseur

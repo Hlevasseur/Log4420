@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <script type="text/javascript" src="./assets/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="./assets/js/modules/utils.js" charset="utf-8"></script>
+  <script type="text/javascript" src="./assets/js/modules/products-module.js" charset="utf-8"></script>
+  <script type="text/javascript" src="./assets/js/modules/url-module.js" charset="utf-8"></script>
+  <script type="text/javascript" src="./assets/js/modules/local-storage-module.js" charset="utf-8"></script>
+  <script type="text/javascript" src="./assets/js/modules/cart-module.js" charset="utf-8"></script>
+  <script type="text/javascript" src="./assets/js/header-checker.js" charset="utf-8"></script>
+  <script type="text/javascript" src="./assets/js/product.js" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+  <title>OnlineShop - Produit</title>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="./index.html">
+        <img alt="logo" src="./assets/img/logo.svg" title="Accueil">
+      </a>
+      <nav>
+        <ul>
+          <li><a href="./index.html">Accueil</a></li>
+          <li><a class="active" href="./products.html">Produits</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+          <li>
+            <a class="shopping-cart" href="./shopping-cart.html" title="Panier">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                <i class="fa fa-shopping-cart fa-stack-1x"></i>
+              </span>
+              <span class="count"></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <article>
+      <h1 id='product-name'></h1>
+      <div  class="row product">
+        <div class="product-display">
+          <img class="product-img" alt="Product Image" src="" id='product-image'>
+        </div>
+        <div class="product-info">
+          <section>
+            <h2>Description</h2>
+            <p id='product-desc'></p>
+          </section>
+          <section>
+            <h2>Caractéristiques</h2>
+            <ul id='product-features'>
+            </ul>
+          </section>
+          <div class="selection-section">
+            <p>Prix: <strong id='product-price'></strong>&thinsp;$</p>
+            <form id="add-to-cart-form">
+              <label for="product-quantity">Quantité:</label>
+              <input class="form-control bordered" type="number" value="1" min="1" id="product-quantity">
+              <button class="btn" title="Ajouter au panier" type="submit">
+                <i class="fa fa-shopping-cart"></i>
+                Ajouter
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </article>
+    <div class="notification bordered" id='dialog'>
+      <p>Produit ajouté au panier !</p>
+    </div>
+  </main>
+  <footer>
+    <p>François Beiger et Hubert Levasseur</p>
+  </footer>
+</body>
+</html>
