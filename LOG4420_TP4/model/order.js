@@ -66,7 +66,7 @@ module.exports.removeOrder = function(id, callback){
       if(error){
         throw error;
       }
-      callback(200);
+      callback(204);
       return;
     });
   });
@@ -96,16 +96,12 @@ module.exports.createOrder = function(param, callback) {
       callback(400);
       return;
     } 
-    
     // Everything is fine, look for order with same id
     Order.getOrder(id, function(err, order){
-      console.log("get order callback");
       if(err) {
         throw err;
       }
       if(order) {
-         console.log("deja order");
-        console.log(order);
         callback(400);
         return;
       }
@@ -142,7 +138,9 @@ function isAProductArray(array, callback) {
       callback(false);
       return;
     }
-    ids[i]=array[i].id; 
+    ids[i]=parseInt(array[i].id); 
+    array[i].id = parseInt(array[i].id);
+    array[i].quantity = parseInt(array[i].quantity);
   }
 
 
