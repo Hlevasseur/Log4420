@@ -21,7 +21,7 @@ router.route('/')
   .delete(function(request, response){
     console.log("delete all ");
     Order.removeAllOrder(function(statusCode){
-            response.sendStatus(statusCode);
+      response.sendStatus(statusCode);
     });
   });
 

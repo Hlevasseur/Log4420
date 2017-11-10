@@ -5,7 +5,6 @@ var Product = require('../model/product');
 router.route('/:id')
   .get(function(request, response) {
     var id = request.params.id;
-    console.log(id);
     Product.getProduct(id, function(errorCode, product) {
       if(errorCode) {
         response.sendStatus(errorCode);

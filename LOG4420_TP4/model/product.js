@@ -25,6 +25,9 @@ module.exports.getProduct = function(id, callback) {
   Product.findOne({ id: id }, function(error, product) {
     if(error) {
       throw error;
+    } else if (!product) {
+      callback(404);
+      return;
     }
     callback(null, product);
   });

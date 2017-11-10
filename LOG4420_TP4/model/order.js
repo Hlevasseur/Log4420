@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var Product = require('./product');
 
 var Order = module.exports = mongoose.model("Order", new Schema({
   id: { type: Number, unique: true },
@@ -28,7 +29,7 @@ module.exports.getOrder = function(id, callback) {
 
 // Get all orders
 module.exports.getOrders = function(callback) {
-  
+
   Order.find(function(error,orders){
     if(error){
       throw error;
@@ -41,7 +42,7 @@ module.exports.removeAllOrder = function(callback){
   Order.remove({}, function(error){
     if(error){
       throw error;
-    }   
+    }
     callback(204);
   });
 }
@@ -63,7 +64,7 @@ module.exports.removeOrder = function(id, callback){
     console.log("!order "+!order)
     if(!order){
       callback(404);
-      return; 
+      return;
     }
     order.remove(function(error){
       if(error){
@@ -83,12 +84,6 @@ module.exports.createOrder = function(param, callback) {
   var products = param.products;
 
     // Check if all params are given
-  console.log(id);  console.log(firstName);
-  console.log(lastName);
-  console.log(email);
-  console.log(phone);
-  console.log(products);
-
   if(!id || !firstName || !lastName || !email || !phone || !products) {
     console.log("not all given");
     callback(400);
@@ -96,11 +91,6 @@ module.exports.createOrder = function(param, callback) {
   }
   // Check if param are valid
   else if (!isEmail(email) || !isPhone(phone) || typeof firstName !== 'string' || typeof lastName !== 'string' || !isAProductArray(products)) {
-    console.log("not valid");
-    console.log(!isEmail(email));
-    console.log(!isPhone(phone) );
-    console.log(!isAProductArray(products));
-
     callback(400);
     return;
   }
@@ -114,7 +104,7 @@ module.exports.createOrder = function(param, callback) {
       callback(400);
       return;
     }
-    // No product found, we can process creation
+    // No order found, we can process creation
     var order = new Order({
       id: id,
       firstName: firstName,
@@ -130,29 +120,31 @@ module.exports.createOrder = function(param, callback) {
       callback(201);
     });
   });
-  
+
 }
 
 // --------------- Private functions ----------------
 
-// Check is the array is composed of id and quantity 
+// Check is the array is composed of id and quantity
 function isAProductArray(array) {
+  var isProduct = true;
   for(i=0; i <i.length; i++) {
     if(!array[i] || !parseInt(array[i].id) || !parseInt(array[i].quantity)) {
       return false;
     }
+
   }
   return array.length > 0;
 }
-       
+
 // Check if the email is correct
 function isEmail(string){
   var patt = new RegExp("^[a-zA-Z_.0-9]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$");
-  return patt.exec(string);   
+  return patt.exec(string);
 };
-    
+
 // Check if the phone is correct
 function isPhone(string){
   var patt = new RegExp("^([2-9])([1-9]){2}\-([0-9]){3}\-([0-9]){4}$");
-  return patt.exec(string);   
+  return patt.exec(string);
 };
