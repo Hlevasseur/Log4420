@@ -29,6 +29,7 @@ router.route('/')
 router.route('/:id')
   .get(function(request, response) {
     var id = request.params.id;
+    console.log(id);
     Order.getOrder(id, function(errorCode, order) {
       if(errorCode) {
         response.sendStatus(errorCode);

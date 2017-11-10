@@ -13,17 +13,12 @@ var Order = module.exports = mongoose.model("Order", new Schema({
 
 
 // Get order by id
-module.exports.getOrder = function(id, callback) {
-  id = parseInt(id);
-  if(!id) {
-    callback(404);
-    return;
-  }
+module.exports.getOrder = function(idStr, callback) {
+  var id = parseInt(idStr);
+  if(!id) { return callback(404); }
   Order.findOne({ id: id }, function(error, order) {
-    if(error) {
-      callback(404);
-    }
-    callback(null, order);
+    if(error || !order) { return callback(404); }
+    return callback(null, order);
   });
 }
 
@@ -47,8 +42,8 @@ module.exports.removeAllOrder = function(callback){
   });
 }
 
-module.exports.removeOrder = function(id, callback){
-  id = parseInt(id);
+module.exports.removeOrder = function(idStr, callback){
+  var id = parseInt(idStr);
   if(!id){
     callback(404);
     return;
@@ -67,7 +62,6 @@ module.exports.removeOrder = function(id, callback){
         throw error;
       }
       callback(204);
-      return;
     });
   });
 }
@@ -85,17 +79,17 @@ module.exports.createOrder = function(param, callback) {
     return;
   }
 
-  
+
    if (!isEmail(email) || !isPhone(phone) || typeof firstName !== 'string' || typeof lastName !== 'string') {
     callback(400);
     return;
   }
-  
+
   isAProductArray(products, function(success){
     if(!success) {
       callback(400);
       return;
-    } 
+    }
     // Everything is fine, look for order with same id
     Order.getOrder(id, function(err, order){
       if(err) {
@@ -126,7 +120,7 @@ module.exports.createOrder = function(param, callback) {
 
 // --------------- Private functions ----------------
 
-// Check is the array is composed of id and quantity 
+// Check is the array is composed of id and quantity
 function isAProductArray(array, callback) {
   if(!array.length>0){
     callback(false);
@@ -134,11 +128,11 @@ function isAProductArray(array, callback) {
   }
   var ids=[array.length];
   for(i=0; i <array.length; i++) {
-    if(!array[i] || !parseInt(array[i].id) || !parseInt(array[i].quantity)) {      
+    if(!array[i] || !parseInt(array[i].id) || !parseInt(array[i].quantity)) {
       callback(false);
       return;
     }
-    ids[i]=parseInt(array[i].id); 
+    ids[i]=parseInt(array[i].id);
     array[i].id = parseInt(array[i].id);
     array[i].quantity = parseInt(array[i].quantity);
   }
