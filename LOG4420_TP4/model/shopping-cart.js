@@ -6,7 +6,8 @@ var ShoppingCart = module.exports = function(session) {
 };
 
 
-ShoppingCart.prototype.getProduct = function (id, callback) {
+ShoppingCart.prototype.getProduct = function (idStr, callback) {
+  var id = parseInt(idStr);
   if(!id) {
     return null;
   }
@@ -20,7 +21,7 @@ ShoppingCart.prototype.getProduct = function (id, callback) {
   return product;
 };
 
-ShoppingCart.prototype.addProduct = function(id, qty, callback) {
+ShoppingCart.prototype.addProduct = function(idStr, qty, callback) {
   // var checking
   // No need to check id, getProduct will do it
   var quantity = parseInt(qty);
@@ -28,6 +29,8 @@ ShoppingCart.prototype.addProduct = function(id, qty, callback) {
     callback(400);
     return;
   }
+
+  var id = parseInt(idStr);
 
   var alreadyInCart = false
   this.products.forEach(function(p) {
@@ -55,10 +58,13 @@ ShoppingCart.prototype.addProduct = function(id, qty, callback) {
   });
 };
 
-ShoppingCart.prototype.updateProduct = function (id, qty, callback) {
+ShoppingCart.prototype.updateProduct = function (idStr, qty, callback) {
   // var checking
   var quantity = parseInt(qty);
+  
   if(!quantity || quantity <= 0) { return callback(400); }
+
+  var id = parseInt(idStr);
 
   var product;
   this.products.forEach(function(p) {
@@ -71,7 +77,9 @@ ShoppingCart.prototype.updateProduct = function (id, qty, callback) {
   callback(null, this);
 };
 
-ShoppingCart.prototype.deleteProduct = function (id, callback) {
+ShoppingCart.prototype.deleteProduct = function (idStr, callback) {
+  var id = parseInt(idStr);
+
   // Check if product exists
   var inCart = false
   this.products.forEach(function(p) {

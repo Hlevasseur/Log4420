@@ -16,8 +16,8 @@ var Product = module.exports = mongoose.model("Product", new Schema({
 }, { versionKey: false }));
 
 // Get product by id
-module.exports.getProduct = function(id, callback) {
-  id = parseInt(id);
+module.exports.getProduct = function(idStr, callback) {
+  var id = parseInt(idStr);
   if(!id) {
     callback(400);
     return;

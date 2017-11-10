@@ -8,7 +8,7 @@ router.route('/')
     response.json(shoppingCart.toJSON());
   })
   .post(function(request, response) {
-    var id = request.body.id;
+    var id = request.body.productId;
     var qty = request.body.quantity;
     var shoppingCart = new ShoppingCart(request.session);
     shoppingCart.addProduct(id, qty, function(errorCode, updatedCart){
@@ -27,17 +27,17 @@ router.route('/')
     response.sendStatus(204);
   });
 
-router.route('/:id')
-  .get(function(request, response){
-    var id = request.params.id;
+router.route('/:productId')
+  .get(function(request, response) {
+    var id = request.params.productId;
     var shoppingCart = new ShoppingCart(request.session);
     var product = shoppingCart.getProduct(id);
     if(!product) { response.sendStatus(404); }
     else { response.json(product); }
   })
   .put(function(request, response) {
-    var id = request.params.id;
-    var qty = request.query.quantity;
+    var id = request.params.productId;
+    var qty = request.body.quantity;
     var shoppingCart = new ShoppingCart(request.session);
     shoppingCart.updateProduct(id, qty, function(errorCode, updatedCart){
       if(errorCode) {
@@ -49,7 +49,7 @@ router.route('/:id')
     })
   })
   .delete(function(request, response) {
-    var id = request.params.id;
+    var id = request.params.productId;
     var shoppingCart = new ShoppingCart(request.session);
     shoppingCart.deleteProduct(id, function(errorCode, updatedCart){
       if(errorCode) {
