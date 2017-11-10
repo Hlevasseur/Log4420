@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Order = require('../model/order');
 
+
 router.route('/')
   .get(function(request, response) {
     Order.getOrders(function(errorCode,orders) {
