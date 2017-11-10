@@ -33,6 +33,17 @@ module.exports.getProduct = function(id, callback) {
   });
 }
 
+// Get products by ids
+
+module.exports.getProductsById = function(ids, callback) {
+  Product.find({id: {$in: ids}},function(error, products) {
+    if(error){
+      throw error;
+    }
+    callback(products);
+  });  
+}
+
 // Get products
 module.exports.getProducts = function(category, criteria, callback) {
   // Var test

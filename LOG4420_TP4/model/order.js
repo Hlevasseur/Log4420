@@ -48,10 +48,8 @@ module.exports.removeAllOrder = function(callback){
 }
 
 module.exports.removeOrder = function(id, callback){
-  console.log("remove order "+ id);
   id = parseInt(id);
   if(!id){
-    console.log("mauvais id ");
     callback(404);
     return;
   }
@@ -60,8 +58,6 @@ module.exports.removeOrder = function(id, callback){
       throw error;
     }
     // if it does not exist
-    console.log(order);
-    console.log("!order "+!order)
     if(!order){
       callback(404);
       return;
@@ -85,56 +81,81 @@ module.exports.createOrder = function(param, callback) {
 
     // Check if all params are given
   if(!id || !firstName || !lastName || !email || !phone || !products) {
-    console.log("not all given");
-    callback(400);
-    return;
-  }
-  // Check if param are valid
-  else if (!isEmail(email) || !isPhone(phone) || typeof firstName !== 'string' || typeof lastName !== 'string' || !isAProductArray(products)) {
     callback(400);
     return;
   }
 
-  // Everything is fine, look for order with same id
-  Order.getOrder(id, function(err, order){
-    if(err) {
-      throw err;
-    }
-    if(order) {
+  
+   if (!isEmail(email) || !isPhone(phone) || typeof firstName !== 'string' || typeof lastName !== 'string') {
+    callback(400);
+    return;
+  }
+  
+  isAProductArray(products, function(success){
+    if(!success) {
       callback(400);
       return;
-    }
-    // No order found, we can process creation
-    var order = new Order({
-      id: id,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phone: phone,
-      products: products
-    });
-    order.save(function(error){
-      if(error) {
-        throw error;
+    } 
+    
+    // Everything is fine, look for order with same id
+    Order.getOrder(id, function(err, order){
+      console.log("get order callback");
+      if(err) {
+        throw err;
       }
-      callback(201);
+      if(order) {
+         console.log("deja order");
+        console.log(order);
+        callback(400);
+        return;
+      }
+      // No product found, we can process creation
+      var order = new Order({
+        id: id,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: phone,
+        products: products
+      });
+      order.save(function(error){
+        if(error) {
+          throw error;
+        }
+        callback(201);
+      });
     });
   });
-
 }
 
 // --------------- Private functions ----------------
 
-// Check is the array is composed of id and quantity
-function isAProductArray(array) {
-  var isProduct = true;
-  for(i=0; i <i.length; i++) {
-    if(!array[i] || !parseInt(array[i].id) || !parseInt(array[i].quantity)) {
-      return false;
-    }
-
+// Check is the array is composed of id and quantity 
+function isAProductArray(array, callback) {
+  if(!array.length>0){
+    callback(false);
+    return;
   }
-  return array.length > 0;
+  var ids=[array.length];
+  for(i=0; i <array.length; i++) {
+    if(!array[i] || !parseInt(array[i].id) || !parseInt(array[i].quantity)) {      
+      callback(false);
+      return;
+    }
+    ids[i]=array[i].id; 
+  }
+
+
+  Product.getProductsById(ids,function(products){
+
+    if(array.length!=products.length){
+      callback(false);
+      return;
+    }else{
+      callback(true);
+      return;
+    }
+  });
 }
 
 // Check if the email is correct
