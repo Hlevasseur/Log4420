@@ -1,0 +1,25 @@
+extends layout.pug
+
+block content
+  main.main-products
+    section.side-barre(aria-label='Filtres')
+      section
+        h2 Catégories
+        #product-categories.button-group
+          button.btn-filtre-produits.bordered(name='cameras') Appareils photo
+          button.btn-filtre-produits.bordered(name='consoles') Consoles
+          button.btn-filtre-produits.bordered(name='screens') Écrans
+          button.btn-filtre-produits.bordered(name='computers') Ordinateurs
+          button.btn-filtre-produits.selected.bordered(name='all') Tous les produits
+      section
+        h2 Classement
+        #product-criteria.button-group
+          button.btn-filtre-produits.bordered.selected(name='price-cr') Prix (bas-haut)
+          button.btn-filtre-produits.bordered(name='price-dcr') Prix (haut-bas)
+          button.btn-filtre-produits.bordered(name='name-cr') Nom (A-Z)
+          button.btn-filtre-produits.bordered(name='name-dcr') Nom (Z-A)
+    article.products
+      .title-band
+        h1 Produits
+        p#products-count.nb-products
+      #products-list.products-list
