@@ -1,0 +1,27 @@
+extends layout.pug
+
+block content
+  main
+    article
+      h1 Contact
+      p
+        | Si vous souhaitez contacter 
+        em OnlineShop
+        | , veuillez utiliser les coordonnées suivantes.
+      .contact-content.bordered
+        section
+          i.fa.fa-mobile.fa-4x(aria-hidden='true')
+          br
+          a(href='tel:5143404711') (514) 340-4711
+        section
+          i.fa.fa-map-marker.fa-4x(aria-hidden='true')
+          p
+            | 2900, boul. Édouard-Montpetit
+            br
+            |             Montréal (Québec)
+            br
+            |             H3T 1J4
+        section
+          i.fa.fa-envelope.fa-4x(aria-hidden='true')
+          br
+          a(href='mailto:onlineshop@polymtl.ca') onlineshop@polymtl.ca
