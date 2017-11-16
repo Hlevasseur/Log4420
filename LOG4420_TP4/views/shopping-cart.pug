@@ -1,0 +1,22 @@
+extends layout.pug
+
+block content
+  main
+    article
+      h1 Panier
+      table.shopping-cart-table
+        thead
+          tr
+            th.first-column
+            th Produit
+            th Prix unitaire
+            th Quantité
+            th.last-column Prix
+        tbody
+      .shopping-cart-total
+        p
+          | Total: 
+          strong#total-amount
+      .shopping-cart-box-buttons
+        button#remove-all-items-button.btn Vider le panier
+        a.btn(href='./order.html') Commander
