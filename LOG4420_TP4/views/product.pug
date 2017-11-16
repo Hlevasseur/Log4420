@@ -1,0 +1,29 @@
+extends layout.pug
+
+block content
+  main
+    article
+      h1#product-name
+      .row.product
+        .product-display
+          img#product-image.product-img(alt='Product Image', src='')
+        .product-info
+          section
+            h2 Description
+            p#product-desc
+          section
+            h2 Caractéristiques
+            ul#product-features
+          .selection-section
+            p
+              | Prix: 
+              strong#product-price
+              |  $
+            form#add-to-cart-form
+              label(for='product-quantity') Quantité:
+              input#product-quantity.form-control.bordered(type='number', value='1', min='1')
+              button.btn(title='Ajouter au panier', type='submit')
+                i.fa.fa-shopping-cart
+                |                 Ajouter
+    #dialog.notification.bordered
+      p Produit ajouté au panier !
