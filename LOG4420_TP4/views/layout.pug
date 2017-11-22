@@ -8,6 +8,7 @@ html(lang='fr')
     script(type='text/javascript', src='../scripts/modules/utils.js', charset='utf-8')
     script(type='text/javascript', src='../scripts/modules/products-module.js', charset='utf-8')
     script(type='text/javascript', src='../scripts/modules/local-storage-module.js', charset='utf-8')
+    script(type='text/javascript', src='../scripts/modules/order-module.js', charset='utf-8')
     script(type='text/javascript', src='../scripts/modules/cart-module.js', charset='utf-8')
     script(type='text/javascript', src='../scripts/modules/url-module.js', charset='utf-8')
     script(type='text/javascript', src='../scripts/header-checker.js', charset='utf-8')
@@ -15,18 +16,18 @@ html(lang='fr')
   body
     header
       .header-content
-        a(href='./index.html')
+        a(href='/')
           img(alt='logo', src='../img/logo.svg', title='Accueil')
         nav
           ul
             li
-              a(class={active: page =='index'})(href='./index.html') Accueil
+              a(class={active: page =='index'})(href='/') Accueil
             li
-              a(class={active: page =='produits' || page=='produit'})(href='./products.html') Produits
+              a(class={active: page =='produits' || page=='produit'})(href='/products') Produits
             li
-              a(class={active: page =='contact'})(href='./contact.html') Contact
+              a(class={active: page =='contact'})(href='/contact') Contact
             li
-              a(class={active: page =='cart'}).shopping-cart(href='./shopping-cart.html', title='Panier')
+              a(class={active: page =='cart'}).shopping-cart(href='/shopping-cart', title='Panier')
                 span.fa-stack.fa-lg
                   i.fa.fa-circle.fa-stack-2x.fa-inverse
                   i.fa.fa-shopping-cart.fa-stack-1x

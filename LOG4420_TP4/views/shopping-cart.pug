@@ -1,7 +1,7 @@
 extends layout.pug
 
 append head
-  script(type='text/javascript', src='../scripts/product.js', charset='utf-8')
+  script(type='text/javascript', src='../scripts/shopping-cart.js', charset='utf-8')
 
 block content
   main
@@ -22,4 +22,4 @@ block content
           strong#total-amount
       .shopping-cart-box-buttons
         button#remove-all-items-button.btn Vider le panier
-        a.btn(href='./order.html') Commander
+        a.btn(href='/order') Commander
