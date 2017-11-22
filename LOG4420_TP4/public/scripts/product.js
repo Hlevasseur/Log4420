@@ -3,7 +3,7 @@
 function updateView(product) {
   $('#product-name').text(product.name);
   $('#product-image')
-    .attr('src', '/assets/img/' + product.image)
+    .attr('src', '/img/' + product.image)
     .attr('alt', product.name);
   $('#product-desc').append(product.description);
   product.features.forEach(function(feature){

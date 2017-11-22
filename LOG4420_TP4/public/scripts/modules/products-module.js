@@ -3,15 +3,13 @@
 var PRODUCTS = (function() {
   var self = {};
 
-  self.getProduct = function(id, callback) {
-    self.getProducts(function(products) {
-      let product = products.filterProductById(id);
-      callback(product);
-    })
+  self.getProduct = function(id, success) {
+    $.getJSON('/api/products/'+id, success);
   }
 
-  self.getProducts = function(callback) {
-    $.getJSON('/data/products.json', callback);
+  self.getProducts = function(category, criteria, success) {
+    var params = {criteria: criteria, category: category};
+    $.getJSON('/api/products', params, success);
   }
 
   return self;

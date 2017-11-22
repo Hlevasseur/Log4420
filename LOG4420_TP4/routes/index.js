@@ -10,7 +10,7 @@ router.get("/products", function(req, res) {
 });
 
 router.get("/product", function(req, res) {
-  res.render("products", { page: "products" , title: "Online Shop - Produit"});
+  res.render("product", { page: "product" , title: "Online Shop - Produit"});
 });
 
 router.get("/shopping-cart", function(req, res) {

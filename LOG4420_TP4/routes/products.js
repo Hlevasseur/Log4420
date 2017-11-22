@@ -47,5 +47,13 @@ router.route('/')
     });
   });
 
+router.route('/ids')
+  .post(function(request, response) {
+      var ids = request.params.ids;
+      Product.getProductsById(ids, function(products){
+        response.json(products);
+      });
+  })
+
 
 module.exports = router;
