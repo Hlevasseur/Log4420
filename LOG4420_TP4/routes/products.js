@@ -41,7 +41,6 @@ router.route('/')
     });
   })
   .delete(function(request, response){
-    console.log("del all product");
     Product.removeAllProducts(function(statusCode){
       response.sendStatus(statusCode);
     });
@@ -49,10 +48,11 @@ router.route('/')
 
 router.route('/ids')
   .post(function(request, response) {
-      var ids = request.params.ids;
-      Product.getProductsById(ids, function(products){
-        response.json(products);
-      });
+    var ids = request.body.ids;
+    console.log(ids);
+    Product.getProductsById(ids, function(errorCode, products){
+      response.json(products);
+    });
   })
 
 

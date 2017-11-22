@@ -1,15 +1,15 @@
 'use strict';
 
 function checkCartBadge() {
-  var count = CART.getProductsCount();
-  if(count > 0) {
-    $(".shopping-cart > .count")
-      .show()
-      .text(count);
-  } else {
-    $('.shopping-cart > .count').hide();
-  }
-
+  CART.getProductsCount(function(count) {
+    if(count > 0) {
+      $(".shopping-cart > .count")
+        .show()
+        .text(count);
+    } else {
+      $('.shopping-cart > .count').hide();
+    }
+  });
 }
 
 $(document).ready(function() {

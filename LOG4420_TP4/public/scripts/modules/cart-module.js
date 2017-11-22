@@ -1,107 +1,136 @@
 'use strict';
 
 var CART = (function(){
-    var self = {};
+  let endpoint = '/api/shopping-cart/';
+  let prodEndpoint = 'api/products/ids';
+  var self = {};
 
   // Private methods
-
-  function newCart() {
-     return {
-       products: []
-     };
-  }
-
-  function getProductFromCart(cart, id) {
-    return cart.products.filterProductById(id);
-  }
-
-  function saveCart(cart) {
-    LOCAL_STORAGE.setObject("cart", cart);
+  function getProductFromCart(id, callback) {
+    $.ajax({
+      url: endpoint+id,
+      type: 'GET',
+      success: function(product) {
+        callback(product);
+      },
+      error: function() {
+        callback(null);
+      }
+    });
   }
 
   // Public Methods
 
-  // Singleton
   // Always use this methods to access the cart
-  self.getCart = function() {
-    var cart = LOCAL_STORAGE.getObject("cart");
-    if(!cart) {
-      cart = newCart();
-    }
-    return cart;
+  self.getCart = function(success) {
+    $.getJSON(endpoint, function(cart) {
+      let ids = cart.map(function(product){ return product.productId; });
+      if(ids.length == 0) { success([]); }
+      else {
+        let body = {"ids": ids};
+        $.ajax({url: prodEndpoint, data: JSON.stringify(body), type: 'POST', contentType: 'application/json'}).done(function(products) {
+          let cartItems = products.map(function(p) {
+            let i = ids.indexOf(p.id);
+            let quantity = cart[i].quantity;
+            return {
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              quantity: quantity
+            }
+          });
+          success(cartItems);
+        });
+      }
+    });
   }
 
   self.flushCart=function() {
-    saveCart(newCart());
-  }
-
-  self.addProductToCart = function(product, qty) {
-    var cart = self.getCart();
-    if(!cart) {
-      cart = newCart()
-    }
-    if(!getProductFromCart(cart, product.id)) {
-      let dataProduct = {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        quantity: qty.toString()
-      }
-      cart.products.push(dataProduct);
-    } else {
-      // Product already in cart, update qty
-      let dataProduct = getProductFromCart(cart, product.id);
-      let count = parseInt(dataProduct.quantity) + parseInt(qty);
-      dataProduct.quantity = count.toString();
-    }
-    saveCart(cart);
-  }
-
-  self.getProductsCount = function() {
-    let cart = self.getCart();
-    var count = 0;
-    cart.products.forEach(function(product){
-      count += parseInt(product.quantity);
+    $.ajax({
+      url: endpoint,
+      type: 'DELETE'
     });
-    return count;
   }
 
-  self.addOneQuantityToCart = function(id){
-      var cart = self.getCart();
-      if(cart){
-          let dataProduct = getProductFromCart(cart, id);
-
-          let count = parseInt(dataProduct.quantity) + 1;
-          dataProduct.quantity = count.toString();
-          saveCart(cart);
-          return dataProduct;
-      }
-
-    }
-
-  self.removeOneQuantityToCart = function(id){
-    var cart = self.getCart();
-    if(cart){
-        let dataProduct = getProductFromCart(cart, id);
-        if(dataProduct.quantity>1){
-            let count = parseInt(dataProduct.quantity) - 1;
-            dataProduct.quantity = count.toString();
-        }
-        saveCart(cart);
-        return dataProduct;
-    }
-  }
-
-  self.removeProductFromCart = function(id){
-      var cart = self.getCart();
-      if(cart){
-          var product = getProductFromCart(cart, id)
-          if(product){
-              cart.products.splice($.inArray(product, cart.products),1);
-              saveCart(cart);
+  self.addProductToCart = function(product, qty, callback) {
+    getProductFromCart(product.id, function(productInCart) {
+      if(!productInCart) {
+        let body = {productId: product.id, quantity: parseInt(qty)};
+        $.ajax({
+          url: endpoint,
+          type: 'POST',
+          data: body,
+          success: function() {
+            callback(true);
+          },
+          error: function() {
+            callback(false);
           }
-
+        });
+      } else {
+        // Product already in cart, update qty
+        self.updateProductQuantity(product.id, qty, callback);
       }
-    }
-    return self;
+    });
+  }
+
+  self.updateProductQuantity = function(id, qty, callback) {
+    getProductFromCart(id, function(product) {
+      var newQty=qty;
+      if(product) { newQty = parseInt(qty) + product.quantity; }
+      else { callback(false); }
+
+      let returnedProduct = {id: id, price: product.price, quantity: newQty};
+
+      let body = {quantity: newQty};
+      $.ajax({
+        url: endpoint+id,
+        type: 'PUT',
+        data: body,
+        success: function() {
+          callback(returnedProduct);
+        },
+        error: function() {
+          callback(null);
+        }
+      })
+    });
+  }
+
+  self.getProductsCount = function(success) {
+    $.getJSON(endpoint, function(cart) {
+      if(cart) {
+        var count = 0;
+        cart.forEach(function(product) {
+          count = count + product.quantity;
+        });
+        success(count);
+      } else {
+        success(0);
+      }
+    });
+  }
+
+  self.addOneQuantityToCart = function(id, callback) {
+    self.updateProductQuantity(id, 1, callback);
+  }
+
+  self.removeOneQuantityToCart = function(id, callback){
+    self.updateProductQuantity(id, -1, callback);
+  }
+
+  self.removeProductFromCart = function(id, callback) {
+    $.ajax({
+      url: endpoint+id,
+      type: 'DELETE',
+      success: function() {
+        callback(true);
+      },
+      error: function() {
+        callback(false);
+      }
+    })
+  }
+
+  return self;
 })();

@@ -1,5 +1,11 @@
 'use strict';
 
+// Generic error shown
+function showError() {
+  alert("Une erreur s'est produite");
+}
+
+
 var UTILS = (function() {
 
   Array.prototype.sortProductsBy = function(criteria, crescent) {

@@ -36,12 +36,16 @@ module.exports.getProduct = function(idStr, callback) {
 // Get products by ids
 
 module.exports.getProductsById = function(ids, callback) {
-  Product.find({id: {$in: ids}},function(error, products) {
-    if(error){
-      throw error;
-    }
-    callback(products);
-  });
+  if(!ids || ids.length == 0) {
+    Product.getProducts("", "", callback);
+  } else {
+    Product.find({id: {$in: ids}}, function(error, products) {
+      if(error){
+        throw error;
+      }
+      callback(null, products);
+    });
+  }
 }
 
 // Get products

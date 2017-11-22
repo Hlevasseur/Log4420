@@ -38,9 +38,14 @@ $(document).ready(function() {
   $('#add-to-cart-form').submit(function(event){
     event.preventDefault();
     let qty = $('#product-quantity').val();
-    CART.addProductToCart(product, qty);
-    displayNotification();
-    checkCartBadge();
+    CART.addProductToCart(product, qty, function(product) {
+      if(!product) {
+        showError();
+      } else {
+        displayNotification();
+        checkCartBadge();
+      }
+    });
   });
 
 });
