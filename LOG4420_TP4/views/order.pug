@@ -1,13 +1,14 @@
 extends layout.pug
 append head
-  script(type='text/javascript', src='../scripts/order.js', charset='utf-8')
+  script(type='text/javascript', src='../scripts/additional-methods.min.js')
   script(type='text/javascript', src='../scripts/messages_fr.js')
+  script(type='text/javascript', src='../scripts/order.js', charset='utf-8')
 
 block content
   main
   article
     h1 Commande
-    form#order-form(action='./confirmation.html', method='post')
+    form#order-form(action='/confirmation', method='post')
       section
         h2 Contact
         .col

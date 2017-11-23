@@ -21,9 +21,12 @@ var CART = (function(){
 
   // Public Methods
 
-  // Always use this methods to access the cart
+  self.getCartProducts = function(success) {
+    $.getJSON(endpoint, success);
+  }
+
   self.getCart = function(success) {
-    $.getJSON(endpoint, function(cart) {
+    self.getCartProducts(function(cart) {
       let ids = cart.map(function(product){ return product.productId; });
       if(ids.length == 0) { success([]); }
       else {

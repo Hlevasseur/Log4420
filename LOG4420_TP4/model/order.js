@@ -87,12 +87,14 @@ module.exports.createOrder = function(param, callback) {
 
 
    if (!isEmail(email) || !isPhone(phone) || typeof firstName !== 'string' || typeof lastName !== 'string') {
+     console.log('wrong type');
     callback(400);
     return;
   }
 
   isAProductArray(products, function(success){
     if(!success) {
+      console.log('not products');
       callback(400);
       return;
     }
@@ -102,6 +104,7 @@ module.exports.createOrder = function(param, callback) {
         return callback(errCode);
       }
       if(order) {
+        console.log('order already exists');
         return callback(400);
       }
       // No product found, we can process creation
@@ -143,9 +146,9 @@ function isAProductArray(array, callback) {
   }
 
 
-  Product.getProductsById(ids,function(products){
+  Product.getProductsById(ids, function(errorCode, products){
 
-    if(array.length!=products.length){
+    if(products && array.length!=products.length){
       callback(false);
       return;
     }else{

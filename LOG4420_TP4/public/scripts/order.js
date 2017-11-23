@@ -40,9 +40,21 @@ $(document).ready(function() {
     // Make sure the form is submitted to the destination defined
     // in the "action" attribute of the form when valid
     submitHandler: function(form) {
-      ORDER.AddOrder($('#first-name').val(),$('#last-name').val());
-      CART.flushCart();
-      form.submit();
+      let firstName = $('#first-name').val();
+      let lastName = $('#last-name').val();
+      let email = $('#email').val();
+      let phone = $('#phone').val();
+      CART.getCartProducts(function(products){
+        let orderProducts = products.map(function(p){ return { id: p.productId, quantity: p.quantity }; });
+        ORDER.AddOrder(firstName, lastName, email, phone, orderProducts, function(success) {
+          if(success) {
+            CART.flushCart();
+            form.submit();
+          } else {
+            showError();
+          }
+        });
+      });
     }
   });
 

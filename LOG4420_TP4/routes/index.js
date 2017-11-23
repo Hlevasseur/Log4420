@@ -21,7 +21,7 @@ router.get("/contact", function(req, res) {
   res.render("contact", { page: "contact" , title: "Online Shop - Contact"});
 });
 
-router.get("/confirmation", function(req, res) {
+router.post("/confirmation", function(req, res) {
   res.render("confirmation", { page: "confirmation" , title: "Online Shop - Confirmation"});
 });
 
