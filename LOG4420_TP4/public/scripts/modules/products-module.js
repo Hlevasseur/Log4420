@@ -4,8 +4,17 @@ var PRODUCTS = (function() {
   let endpoint = '/api/products/';
   var self = {};
 
-  self.getProduct = function(id, success) {
-    $.getJSON(endpoint+id, success);
+  self.getProduct = function(id, callback) {
+    $.ajax({
+      url: endpoint+id,
+      type: 'GET',
+      success: function(product) {
+        callback(product);
+      },
+      error: function() {
+        callback(null);
+      }
+    });
   }
 
   self.getProducts = function(category, criteria, success) {

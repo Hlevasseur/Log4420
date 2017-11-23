@@ -6,7 +6,7 @@ function updateProductsView(products) {
   products.forEach(function(product){
     $('#products-list')
       .append(
-      "<a class='product-card bordered' href='/product?id=" + product.id + "' title='En savoir plus...'>" +
+      "<a class='product-card bordered' href='/produit?id=" + product.id + "' title='En savoir plus...'>" +
         "<h2>" + product.name + "</h2>" +
         "<img alt=" + product.name + " src=/img/" + product.image + ">" +
         "<p><small>Prix</small> " + product.price.toCurrencyString() + "&thinsp;$</p>" +

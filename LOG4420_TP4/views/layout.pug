@@ -23,11 +23,11 @@ html(lang='fr')
             li
               a(class={active: page =='index'})(href='/') Accueil
             li
-              a(class={active: page =='produits' || page=='produit'})(href='/products') Produits
+              a(class={active: page =='produits' || page=='produit'})(href='/produits') Produits
             li
               a(class={active: page =='contact'})(href='/contact') Contact
             li
-              a(class={active: page =='cart'}).shopping-cart(href='/shopping-cart', title='Panier')
+              a(class={active: page =='cart'}).shopping-cart(href='/panier', title='Panier')
                 span.fa-stack.fa-lg
                   i.fa.fa-circle.fa-stack-2x.fa-inverse
                   i.fa.fa-shopping-cart.fa-stack-1x

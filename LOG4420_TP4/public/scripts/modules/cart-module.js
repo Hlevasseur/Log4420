@@ -48,10 +48,14 @@ var CART = (function(){
     });
   }
 
-  self.flushCart=function() {
+  self.flushCart=function(callback) {
     $.ajax({
       url: endpoint,
       type: 'DELETE'
+    }).done(function(){
+      callback(true);
+    }).catch(function(error){
+      callback(false);
     });
   }
 
@@ -83,20 +87,23 @@ var CART = (function(){
       if(product) { newQty = parseInt(qty) + product.quantity; }
       else { callback(false); }
 
-      let returnedProduct = {id: id, price: product.price, quantity: newQty};
+      PRODUCTS.getProduct(id, function(p) {
 
-      let body = {quantity: newQty};
-      $.ajax({
-        url: endpoint+id,
-        type: 'PUT',
-        data: body,
-        success: function() {
-          callback(returnedProduct);
-        },
-        error: function() {
-          callback(null);
-        }
-      })
+        let returnedProduct = {id: id, price: p.price, quantity: newQty};
+        let body = {quantity: newQty};
+
+        $.ajax({
+          url: endpoint+id,
+          type: 'PUT',
+          data: body,
+          success: function() {
+            callback(returnedProduct);
+          },
+          error: function() {
+            callback(null);
+          }
+        })
+      });
     });
   }
 

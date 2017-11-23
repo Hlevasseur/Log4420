@@ -5,15 +5,19 @@ router.get("/", function(req, res) {
   res.render("index", { page: "index" , title: "Online Shop - Accueil"});
 });
 
-router.get("/products", function(req, res) {
+router.get("/accueil", function(req, res) {
+  res.render("index", { page: "index" , title: "Online Shop - Accueil"});
+});
+
+router.get("/produits", function(req, res) {
   res.render("products", { page: "products" , title: "Online Shop - Produits"});
 });
 
-router.get("/product", function(req, res) {
+router.get("/produit", function(req, res) {
   res.render("product", { page: "product" , title: "Online Shop - Produit"});
 });
 
-router.get("/shopping-cart", function(req, res) {
+router.get("/panier", function(req, res) {
   res.render("shopping-cart", { page: "shopping-cart" , title: "Online Shop - Shopping Cart"});
 });
 
@@ -25,7 +29,7 @@ router.post("/confirmation", function(req, res) {
   res.render("confirmation", { page: "confirmation" , title: "Online Shop - Confirmation"});
 });
 
-router.get("/order", function(req, res) {
+router.get("/commande", function(req, res) {
   res.render("order", { page: "order" , title: "Online Shop - Commande"});
 });
 
