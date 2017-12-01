@@ -23,11 +23,12 @@ export class AppComponent implements OnInit {
    * On Init
    */
   ngOnInit() {
-    this.getCount();
+    this.shoppingCartService.updateCount.subscribe(() => {
+      this.getCount();
+    });
   }
 
   getCount(): void {
-    this.shoppingCartService.countUpdated.subscribe((count: number) => this.shCount = count);
-    this.shoppingCartService.getCount().then();
+    this.shoppingCartService.getCount().then(count => this.shCount = count);
   }
 }

@@ -5,11 +5,20 @@ import { Product, ProductsService } from './products.service';
 
 /**
  * Defines a ShoppingCart Product
- *
  */
-class ShoppingCartProduct {
-  productId: string;
+export class ShoppingCartProduct {
+  productId: number;
   quantity: number;
+}
+
+/**
+ * Defines a DisplayedCartProduct
+ */
+export class DisplayedCartProduct {
+  productId: number;
+  name: string;
+  quantity: number;
+  price: number;
 }
 
 /**
@@ -18,7 +27,7 @@ class ShoppingCartProduct {
 @Injectable()
 export class ShoppingCartService {
 
-  @Output() countUpdated: EventEmitter<number> = new EventEmitter();
+  @Output() updateCount: EventEmitter<null> = new EventEmitter();
   private baseUrl = `${Config.apiUrl}/shopping-cart/`;
   private options:RequestOptions = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json' }), withCredentials: true });
 
@@ -53,19 +62,42 @@ export class ShoppingCartService {
   }
 
   /**
+   * Get Displayed Products (i.e. containing price id, ) from Cart
+   */
+  getDisplayedItems(): Promise<DisplayedCartProduct[]> {
+    var productService = new ProductsService(this.http);
+    return new Promise(function(resolve, reject) {
+      this.getShoppingCart()
+        .then(shProducts => {
+          let ids = shProducts.map(shp => shp.productId)
+          productService.getProducts().then(products => {
+            products.filter(p => ids.includes(p.id) ? p : null);
+            products.sort((p1, p2) => p1.id - p2.id);
+            shProducts.sort((p1, p2) => p1.productId - p2.productId);
+            let displayedProducts = shProducts as DisplayedCartProduct[];
+            displayedProducts.forEach(function(p, index) {
+              p.price = products[index].price;
+              p.name = products[index].name;
+            });
+            resolve(displayedProducts);
+          }).catch(reject);
+        }).catch(reject);
+    });
+  }
+
+  /**
    * Gets all the products in the shopping cart.
    *
    * @return {Promise<number>}   The promise containing the number of items.
    */
   getCount(): Promise<number> {
-    let self = this;
+    const self = this;
     return this.getShoppingCart()
       .then(function(shoppingCartProducts) {
         var count: number = 0;
         shoppingCartProducts.forEach(function(shProduct) {
           count = count + shProduct.quantity;
         });
-        self.countUpdated.emit(count);
         return count;
       });
   }
@@ -84,9 +116,13 @@ export class ShoppingCartService {
       productId: productId,
       quantity: quantity
     }
+    let self = this;
     return this.http.post(this.baseUrl, body, this.options)
       .toPromise()
-      .then(response => response.status);
+      .then(response => {
+        self.updateCount.emit();
+        return response.status;
+      })
   }
 
 
@@ -102,9 +138,13 @@ export class ShoppingCartService {
   updateProductQuantity(productId, newQuantity): Promise<number> {
     const url = this.baseUrl + productId;
     const body = { quantity: newQuantity };
+    const self = this;
     return this.http.put(url, body, this.options)
       .toPromise()
-      .then(response => response.status);
+      .then(response => {
+        self.updateCount.emit();
+        return response.status;
+      })
   }
 
 
@@ -118,9 +158,13 @@ export class ShoppingCartService {
    */
   deleteProduct(productId): Promise<number> {
     const url = this.baseUrl + productId;
+    const self = this;
     return this.http.delete(url, this.options)
       .toPromise()
-      .then(response => response.status);
+      .then(response => {
+        self.updateCount.emit();
+        return response.status;
+      })
   }
 
 
@@ -130,9 +174,13 @@ export class ShoppingCartService {
    * @return {Promise<number>}  The Promise containing the response status
    */
   deleteCart(): Promise<number> {
+    const self = this;
     return this.http.delete(this.baseUrl, this.options)
       .toPromise()
-      .then(response => response.status);
+      .then(response => {
+        self.updateCount.emit();
+        return response.status;
+      })
   }
 
 }
