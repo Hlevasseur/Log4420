@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Config } from '../config';
 import { Product } from './products.service';
@@ -17,6 +17,8 @@ class ShoppingCartProduct {
  */
 @Injectable()
 export class ShoppingCartService {
+
+  @Output() countUpdated: EventEmitter<number> = new EventEmitter();
 
   /**
    * Handles the current error.
@@ -60,12 +62,14 @@ export class ShoppingCartService {
    * @return {Promise<number>}   The promise containing the number of items.
    */
   getCount(): Promise<number> {
+    let self = this;
     return this.getShoppingCart()
             .then(function(shoppingCartProducts) {
-              var count;
+              var count: number = 0;
               shoppingCartProducts.forEach(function(shProduct) {
                 count = count + shProduct.quantity;
               });
+              self.countUpdated.emit(count);
               return count;
             })
   }
