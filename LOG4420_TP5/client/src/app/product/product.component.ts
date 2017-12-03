@@ -43,16 +43,14 @@ export class ProductComponent implements OnInit {
     const quantity: number = parseInt(input.value);
     const self = this;
     this.shoppingCartService.addProductToCart(this.productId, quantity)
-      .then(success => {
-        if(success) {
-          self.displayNotification();
-        }
+      .then(() => {
+        self.displayNotification();
       });
   }
 
   displayNotification(): void {
     this.notification = true;
-    setTimeout(() => this.notification = false, 5000);
+    setTimeout(5000, () => this.notification = false);
   }
 
 }

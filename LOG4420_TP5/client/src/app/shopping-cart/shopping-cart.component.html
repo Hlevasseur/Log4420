@@ -39,7 +39,7 @@
     </table>
     <p class="shopping-cart-total">Total: <strong id="total-amount">{{sum | currency:'CAD':'symbol-narrow':'1.1-2':'fr'}}</strong></p>
     <a class="btn pull-right" routerLink="/commande">Commander <i class="fa fa-angle-double-right"></i></a>
-    <button class="btn" id="remove-all-items-button"><i class="fa fa-trash-o"></i>&nbsp; Vider le panier</button>
+    <button class="btn" id="remove-all-items-button" (click)="flushCart()"><i class="fa fa-trash-o"></i>&nbsp; Vider le panier</button>
   </div>
   <ng-template #empty_content>
     <h1>Panier</h1>

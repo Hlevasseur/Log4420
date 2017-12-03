@@ -53,4 +53,13 @@ export class ShoppingCartComponent implements OnInit {
       });
   }
 
+  flushCart(): void {
+    const self = this;
+    this.shoppingCartService.deleteCart()
+      .then(()=> {
+        self.products = [];
+        self.updateSum();
+      });
+  }
+
 }
