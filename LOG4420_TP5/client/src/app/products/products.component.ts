@@ -15,17 +15,17 @@ export class ProductsComponent implements OnInit{
   selectedCriteria="Prix (bas-haut)";
   selectedCategory="Tous les produits";
   categoryList = [ 
-    'Appareils photo',
-    'Consoles',
-    'Écrans',
-    'Ordinateurs',
-    'Tous les produits'
+    "Appareils photo",
+    "Consoles",
+    "Écrans",
+    "Ordinateurs",
+    "Tous les produits"
   ];
   classementList = [ 
-    'Prix (bas-haut)',
-    'Prix (haut-bas)',
-    'Nom (A-Z)',
-    'Nom (Z-A)'
+    "Prix (bas-haut)",
+    "Prix (haut-bas)",
+    "Nom (A-Z)",
+    "Nom (Z-A)"
   ];
   
   constructor(private productService: ProductsService) { }
