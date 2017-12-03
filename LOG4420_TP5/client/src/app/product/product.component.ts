@@ -42,11 +42,23 @@ export class ProductComponent implements OnInit {
   addProductToCart(input): void {
     const quantity: number = parseInt(input.value);
     const self = this;
-    this.shoppingCartService.addProductToCart(this.productId, quantity)
-      .then(() => {
+    this.shoppingCartService.getShoppingCart()
+      .then(products => {
+        var promise: Promise<Object>;
+        if(products.map(p => p.productId).includes(this.productId)) {
+          const prevQty = products.filter(p => p.productId == this.productId ? p : null)[0].quantity;
+          const newQty = prevQty + quantity;
+          promise = this.shoppingCartService.updateProductQuantity(this.productId, newQty);
+        } else {
+          promise = this.shoppingCartService.addProductToCart(this.productId, quantity)
+        }
+        return promise;
+      }).then(() => {
         self.displayNotification();
       });
   }
+
+
 
   displayNotification(): void {
     this.notification = true;
