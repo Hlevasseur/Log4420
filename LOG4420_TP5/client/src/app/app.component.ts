@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
     this.shoppingCartService.updateCount.subscribe(() => {
       this.getCount();
     });
+    this.getCount();
   }
 
   getCount(): void {

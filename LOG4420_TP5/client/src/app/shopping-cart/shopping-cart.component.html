@@ -21,23 +21,23 @@
           <td>
             <a routerLink="/produits/{{product.id}}">{{product.name}}</a>
           </td>
-          <td>{{product.price | currency:'1.1-2':'fr'}}</td>
+          <td>{{product.price | currency:'CAD':'symbol-narrow':'1.1-2':'fr'}}</td>
           <td>
             <div class="row">
               <div class="col">
-                <button class="remove-quantity-button" title="Retirer" (click)="addQuantityToProduct(product.id, -1, $event)"><i class="fa fa-minus"></i></button>
+                <button class="remove-quantity-button" title="Retirer" (click)="updateProductQuantity(product.id, -1, $event)"><i class="fa fa-minus"></i></button>
               </div>
               <div class="col quantity">{{product.quantity}}</div>
               <div class="col">
-                <button class="add-quantity-button" title="Ajouter" (click)="addQuantityToProduct(product.id, 1)"><i class="fa fa-plus"></i></button>
+                <button class="add-quantity-button" title="Ajouter" (click)="updateProductQuantity(product.id, 1)"><i class="fa fa-plus"></i></button>
               </div>
             </div>
           </td>
-          <td class="price">{{product.price * product.quantity | currency:'1.1-2':'fr'}}</td>
+          <td class="price">{{product.price * product.quantity | currency:'CAD':'symbol-narrow':'1.1-2':'fr'}}</td>
         </tr>
       </tbody>
     </table>
-    <p class="shopping-cart-total">Total: <strong id="total-amount">{{sum | currency:'1.1-2':'fr'}}&thinsp;$</strong></p>
+    <p class="shopping-cart-total">Total: <strong id="total-amount">{{sum | currency:'CAD':'symbol-narrow':'1.1-2':'fr'}}</strong></p>
     <a class="btn pull-right" routerLink="/commande">Commander <i class="fa fa-angle-double-right"></i></a>
     <button class="btn" id="remove-all-items-button"><i class="fa fa-trash-o"></i>&nbsp; Vider le panier</button>
   </div>

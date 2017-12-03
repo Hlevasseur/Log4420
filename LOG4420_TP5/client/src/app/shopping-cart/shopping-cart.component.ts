@@ -31,8 +31,16 @@ export class ShoppingCartComponent implements OnInit {
     this.products.forEach(p => this.sum = this.sum + p.price*p.quantity );
   }
 
-  addQuantityToProduct(productId, quantity, event): void {
-
+  updateProductQuantity(productId, quantity, event): void {
+    const self = this;
+    this.shoppingCartService.updateProductQuantity(productId, quantity)
+      .then(success => {
+        if(success) {
+          const p = self.products.filter(p => p.productId == productId ? p : null)[0];
+          p.quantity += quantity;
+          self.updateSum();
+        }
+      });
   }
 
 }
