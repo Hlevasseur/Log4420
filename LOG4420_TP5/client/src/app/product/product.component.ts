@@ -62,7 +62,7 @@ export class ProductComponent implements OnInit {
 
   displayNotification(): void {
     this.notification = true;
-    setTimeout(5000, () => this.notification = false);
+    setTimeout(() => this.notification = false, 5000);
   }
 
 }
