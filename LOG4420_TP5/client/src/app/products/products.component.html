@@ -16,7 +16,7 @@
   <span class="right-header" id="products-count">{{productsList.length}} produits</span>
   <h1>Produits</h1>
   <div class="products" id="products-list">
-    <div class="product" *ngFor="let p of productsList" (click)="onSelect(p)">
+    <div class="product" *ngFor="let p of productsList">
       <a routerLink="/produits/{{p.id}}" title="En savoir plus...">
         <h2>{{p.name}}</h2>
         <img alt="{{p.name}}" src="./assets/img/{{p.image}}">

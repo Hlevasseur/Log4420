@@ -28,7 +28,7 @@ export class ProductsComponent implements OnInit{
     "Nom (Z-A)"
   ];
   
-  constructor(private productService: ProductsService) { }
+  constructor(private productService: ProductsService) { this.productsList = new Array<Product>(); }
  
   ngOnInit() {
     this.getProducts();
