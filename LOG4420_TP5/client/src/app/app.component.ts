@@ -23,8 +23,9 @@ export class AppComponent implements OnInit {
    * On Init
    */
   ngOnInit() {
+    const self = this;
     this.shoppingCartService.updateCount.subscribe(() => {
-      this.getCount();
+      self.getCount();
     });
     this.getCount();
   }

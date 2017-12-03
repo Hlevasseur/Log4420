@@ -113,9 +113,9 @@ export class ShoppingCartService {
    * @param productId             The id of the product
    * @param quantity              The quantity of the product
    *
-   * @return {Promise<boolean>}    The Promise containing the response status
+   * @return {Promise<>}    The Promise containing the response status
    */
-  addProductToCart(productId:number, quantity:number): Promise<boolean> {
+  addProductToCart(productId:number, quantity:number): Promise<null> {
     const body = JSON.stringify({
       productId: productId,
       quantity: quantity
@@ -123,9 +123,8 @@ export class ShoppingCartService {
     let self = this;
     return this.http.post(this.baseUrl, body, this.options)
       .toPromise()
-      .then(response => {
+      .then(() => {
         self.updateCount.emit();
-        return response.status == 201;
       }).catch(ShoppingCartService.handleError)
   }
 
@@ -136,18 +135,17 @@ export class ShoppingCartService {
    * @param productId           The id of the product
    * @param newQuantity         The new quantity of the product
    *
-   * @return {Promise<boolean>}  The promise containing the response status
+   * @return {Promise<>}  The promise containing the response status
    *
    */
-  updateProductQuantity(productId, newQuantity): Promise<boolean> {
+  updateProductQuantity(productId: number, newQuantity: number): Promise<null> {
     const url = this.baseUrl + productId;
-    const body = { quantity: newQuantity };
+    const body = JSON.stringify({ quantity: newQuantity });
     const self = this;
     return this.http.put(url, body, this.options)
       .toPromise()
-      .then(response => {
+      .then(() => {
         self.updateCount.emit();
-        return response.status == 204;
       }).catch(ShoppingCartService.handleError);
   }
 
@@ -157,17 +155,16 @@ export class ShoppingCartService {
    *
    * @param productId           The id of the product
    *
-   * @return {Promise<boolean>}  The Promise containing the response status
+   * @return {Promise<>}        The Promise containing the response status
    *
    */
-  deleteProduct(productId): Promise<boolean> {
+  deleteProduct(productId: number): Promise<null> {
     const url = this.baseUrl + productId;
     const self = this;
     return this.http.delete(url, this.options)
       .toPromise()
       .then(response => {
         self.updateCount.emit();
-        return response.status == 204;
       }).catch(ShoppingCartService.handleError);
   }
 
@@ -175,15 +172,14 @@ export class ShoppingCartService {
   /**
    * Delete the cart
    *
-   * @return {Promise<boolean>}  The Promise containing the response status
+   * @return {Promise<null>}  The Promise containing the response status
    */
-  deleteCart(): Promise<boolean> {
+  deleteCart(): Promise<null> {
     const self = this;
     return this.http.delete(this.baseUrl, this.options)
       .toPromise()
       .then(response => {
         self.updateCount.emit();
-        return response.status == 204;
       }).catch(ShoppingCartService.handleError);
   }
 

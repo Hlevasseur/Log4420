@@ -28,18 +28,28 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   updateSum(): void {
+    this.sum = 0;
     this.products.forEach(p => this.sum = this.sum + p.price*p.quantity );
   }
 
-  updateProductQuantity(productId, quantity, event): void {
+  updateProductQuantity(productId: number, quantity: number): void {
     const self = this;
-    this.shoppingCartService.updateProductQuantity(productId, quantity)
-      .then(success => {
-        if(success) {
-          const p = self.products.filter(p => p.productId == productId ? p : null)[0];
-          p.quantity += quantity;
-          self.updateSum();
-        }
+    const prevQty = this.products.filter(p => p.productId == productId ? p : null)[0].quantity;
+    const newQty = prevQty + quantity;
+    this.shoppingCartService.updateProductQuantity(productId, newQty)
+      .then(() => {
+        const p = self.products.filter(p => p.productId == productId ? p : null)[0];
+        p.quantity += quantity;
+        self.updateSum();
+      });
+  }
+
+  deleteProduct(productId: number): void {
+    const self = this;
+    this.shoppingCartService.deleteProduct(productId)
+      .then(() => {
+        self.products = self.products.filter(p => p.productId != productId ? p : null);
+        self.updateSum();
       });
   }
 

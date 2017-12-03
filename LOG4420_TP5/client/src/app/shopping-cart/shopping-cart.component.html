@@ -14,22 +14,22 @@
       <tbody>
         <tr *ngFor="let product of products">
           <td>
-            <button class="remove-item-button" title="Supprimer">
+            <button class="remove-item-button" title="Supprimer" (click)="deleteProduct(product.productId)">
               <i class="fa fa-times"></i>
             </button>
           </td>
           <td>
-            <a routerLink="/produits/{{product.id}}">{{product.name}}</a>
+            <a routerLink="/produits/{{product.productId}}">{{product.name}}</a>
           </td>
           <td>{{product.price | currency:'CAD':'symbol-narrow':'1.1-2':'fr'}}</td>
           <td>
             <div class="row">
               <div class="col">
-                <button class="remove-quantity-button" title="Retirer" (click)="updateProductQuantity(product.id, -1, $event)"><i class="fa fa-minus"></i></button>
+                <button class="remove-quantity-button" title="Retirer" (click)="updateProductQuantity(product.productId, -1)" [disabled]="product.quantity==1"><i class="fa fa-minus"></i></button>
               </div>
               <div class="col quantity">{{product.quantity}}</div>
               <div class="col">
-                <button class="add-quantity-button" title="Ajouter" (click)="updateProductQuantity(product.id, 1)"><i class="fa fa-plus"></i></button>
+                <button class="add-quantity-button" title="Ajouter" (click)="updateProductQuantity(product.productId, 1)"><i class="fa fa-plus"></i></button>
               </div>
             </div>
           </td>
