@@ -65,9 +65,10 @@ export class ShoppingCartService {
    * Get Displayed Products (i.e. containing price id, ) from Cart
    */
   getDisplayedItems(): Promise<DisplayedCartProduct[]> {
-    var productService = new ProductsService(this.http);
+    const productService = new ProductsService(this.http);
+    const self = this;
     return new Promise(function(resolve, reject) {
-      this.getShoppingCart()
+      self.getShoppingCart()
         .then(shProducts => {
           let ids = shProducts.map(shp => shp.productId)
           productService.getProducts().then(products => {
