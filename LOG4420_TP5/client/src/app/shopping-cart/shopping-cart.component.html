@@ -25,11 +25,11 @@
           <td>
             <div class="row">
               <div class="col">
-                <button class="remove-quantity-button" title="Retirer" disabled><i class="fa fa-minus"></i></button>
+                <button class="remove-quantity-button" title="Retirer" (click)="addQuantityToProduct(product.id, -1, $event)"><i class="fa fa-minus"></i></button>
               </div>
               <div class="col quantity">{{product.quantity}}</div>
               <div class="col">
-                <button class="add-quantity-button" title="Ajouter"><i class="fa fa-plus"></i></button>
+                <button class="add-quantity-button" title="Ajouter" (click)="addQuantityToProduct(product.id, 1)"><i class="fa fa-plus"></i></button>
               </div>
             </div>
           </td>

@@ -31,4 +31,8 @@ export class ShoppingCartComponent implements OnInit {
     this.products.forEach(p => this.sum = this.sum + p.price*p.quantity );
   }
 
+  addQuantityToProduct(productId, quantity, event): void {
+
+  }
+
 }
