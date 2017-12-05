@@ -19,14 +19,14 @@ import { ShoppingCartService } from './services/shopping-cart.service';
 // Application routes
 const appRoutes: Routes = [
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
-  { path: 'accueil', component: HomeComponent },
-  { path: 'produits', component: ProductsComponent },
-  { path: 'produits/:id', component: ProductComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'panier', component: ShoppingCartComponent },
-  { path: 'commande', component: OrderComponent },
-  { path: 'confirmation', component: ConfirmationComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: 'accueil', component: HomeComponent, pathMatch: 'full'  },
+  { path: 'produits', component: ProductsComponent, pathMatch: 'full'  },
+  { path: 'produits/:id', component: ProductComponent, pathMatch: 'full'  },
+  { path: 'contact', component: ContactComponent, pathMatch: 'full'  },
+  { path: 'panier', component: ShoppingCartComponent, pathMatch: 'full'  },
+  { path: 'commande', component: OrderComponent, pathMatch: 'full'  },
+  { path: 'confirmation', component: ConfirmationComponent, pathMatch: 'full'  },
+  { path: '**', component: PageNotFoundComponent, pathMatch: 'full'  }
 ];
 
 @NgModule({
