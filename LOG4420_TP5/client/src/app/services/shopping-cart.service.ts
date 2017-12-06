@@ -66,27 +66,26 @@ export class ShoppingCartService {
    */
   getDisplayedItems(): Promise<DisplayedCartProduct[]> {
     const productService = new ProductsService(this.http);
-    const self = this;
-    return new Promise(function(resolve, reject) {
-      self.getShoppingCart()
-        .then(shProducts => {
-          let ids = shProducts.map(shp => shp.productId)
-          productService.getProducts().then(products => {
-            products.filter(p => ids.includes(p.id) ? p : null);
-            // Sorting by id for convenience
-            products.sort((p1, p2) => p1.id - p2.id);
-            shProducts.sort((p1, p2) => p1.productId - p2.productId);
-            let displayedProducts = shProducts as DisplayedCartProduct[];
-            displayedProducts.forEach(function(p, index) {
-              p.price = products[index].price;
-              p.name = products[index].name;
-            });
-            // Need to sort by name
-            displayedProducts.sort((p1, p2) => p1.name.toLowerCase() < p2.name.toLowerCase() ? -1 : 1);
-            resolve(displayedProducts);
-          }).catch(ShoppingCartService.handleError);
-        }).catch(ShoppingCartService.handleError);
-    });
+    var displayedProducts: DisplayedCartProduct[] = [];
+    return this.getShoppingCart()
+      .then(shProducts => {
+        displayedProducts = shProducts as DisplayedCartProduct[];
+        return productService.getProducts();
+      })
+      .then(response => {
+        let ids = displayedProducts.map(p => p.productId);
+        var products = response.filter(p => ids.includes(p.id) ? p : null);
+        // Sorting by id for convenience
+        products.sort((p1, p2) => p1.id - p2.id);
+        displayedProducts.sort((p1, p2) => p1.productId - p2.productId);
+        displayedProducts.forEach(function(p, index) {
+          p.price = products[index].price;
+          p.name = products[index].name;
+        });
+        // Need to sort by name
+        displayedProducts.sort((p1, p2) => p1.name.toLowerCase() < p2.name.toLowerCase() ? -1 : 1);
+        return displayedProducts;
+      });
   }
 
   /**

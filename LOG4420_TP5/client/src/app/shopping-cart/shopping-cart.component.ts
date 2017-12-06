@@ -45,12 +45,14 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   deleteProduct(productId: number): void {
-    const self = this;
-    this.shoppingCartService.deleteProduct(productId)
-      .then(() => {
-        self.products = self.products.filter(p => p.productId != productId ? p : null);
-        self.updateSum();
-      });
+    if(confirm("Voulez-vous supprimerle produit du panier ?")) {
+      const self = this;
+      this.shoppingCartService.deleteProduct(productId)
+        .then(() => {
+          self.products = self.products.filter(p => p.productId != productId ? p : null);
+          self.updateSum();
+        });
+    }
   }
 
   flushCart(): void {
