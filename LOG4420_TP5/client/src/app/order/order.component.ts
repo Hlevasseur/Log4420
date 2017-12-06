@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 import {Order, OrderService} from '../services/order.service';
 import {ShoppingCartProduct,  ShoppingCartService} from '../services/shopping-cart.service';
 
@@ -17,7 +18,7 @@ export class OrderComponent implements OnInit {
   orderForm: any;
   order: Order;
   idmax = 100000;
-  
+
   constructor(
     private router:Router,
     private shoppingCartService: ShoppingCartService,
@@ -43,11 +44,11 @@ export class OrderComponent implements OnInit {
           required: true,
           phoneUS: true
         },
-        'credit-card': {
+        'credit_card': {
           required: true,
           creditcard: true
         },
-        'credit-card-expiry': {
+        'credit_card_expiry': {
           ccexp: true
         }
       }
@@ -57,35 +58,34 @@ export class OrderComponent implements OnInit {
   /**
    * Submits the order form.
    */
-  submit() {
-
+  submit(form: NgForm) {
     if (!this.orderForm.valid()) {
       return;
-    }else{
-      this.orderService.getNumberOrders().then(idMax => {//Récupération du dernier id
-        if(!idMax){
-	      idMax=0;
-        }
-        this.order = new Order();
-        this.shoppingCartService.getShoppingCart()
-          .then(shoppingCartProducts => {
-            this.order.id = idMax+1;
-            this.order.firstName = this.orderForm.find('#first-name').val();
-            this.order.lastName = this.orderForm.find('#last-name').val();
-            this.order.email = this.orderForm.find('#email').val();
-            this.order.phone = this.orderForm.find('#phone').val();
-            for(let i = 0; i<shoppingCartProducts.length;i++){
-              this.order.products.push({quantity:shoppingCartProducts[i].quantity,id:shoppingCartProducts[i].productId});
-            }
-            this.orderService.pushOrder(this.order).then(number =>{
-              if(number==201){  // La commande a été enregistrée
-                this.shoppingCartService.deleteCart();
-                this.router.navigate(["/confirmation"],{queryParams:{id: this.order.id, firstName: this.order.firstName,lastName: this.order.lastName}});
-              }});
-            });
-        
+    } else {
+      this.orderService.getNumberOrders()
+        .then(idMax => {//Récupération du dernier id
+          if(!idMax){
+  	       idMax=0;
+          }
+          this.order = new Order();
+          this.shoppingCartService.getShoppingCart()
+            .then(shoppingCartProducts => {
+              this.order.id = idMax+1;
+              this.order.firstName = form.value.first_name;
+              this.order.lastName = form.value.last_name;
+              this.order.email = form.value.email;
+              this.order.phone = form.value.phone;
+              for(let i = 0; i<shoppingCartProducts.length;i++){
+                this.order.products.push({quantity:shoppingCartProducts[i].quantity,id:shoppingCartProducts[i].productId});
+              }
+              this.orderService.pushOrder(this.order).then(number =>{
+                if(number==201){  // La commande a été enregistrée
+                  this.shoppingCartService.deleteCart();
+                  this.router.navigate(["/confirmation"],{queryParams:{id: this.order.id, firstName: this.order.firstName,lastName: this.order.lastName}});
+                }});
+              });
       })
     }
-    
+
   }
 }
