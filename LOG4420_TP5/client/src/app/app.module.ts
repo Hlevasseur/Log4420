@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ProductsService } from './services/products.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { OrderService } from './services/order.service';
+import { CustomCurrencyPipe } from './services/currency.pipe';
 
 // Application routes
 const appRoutes: Routes = [
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
     ShoppingCartComponent,
     OrderComponent,
     ConfirmationComponent,
+    CustomCurrencyPipe,
     PageNotFoundComponent
   ],
   imports: [

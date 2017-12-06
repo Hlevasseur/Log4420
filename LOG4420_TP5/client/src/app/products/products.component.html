@@ -20,7 +20,7 @@
       <a routerLink="/produits/{{p.id}}" title="En savoir plus...">
         <h2>{{p.name}}</h2>
         <img alt="{{p.name}}" src="./assets/img/{{p.image}}">
-        <p><small>Prix</small> {{p.price}}&thinsp;$</p>
+        <p><small>Prix</small> {{p.price | customCurrencyPipe }}</p>
       </a>
     </div>
   </div>

@@ -14,31 +14,31 @@ export class ProductsComponent implements OnInit{
   category = "";
   selectedCriteria="Prix (bas-haut)";
   selectedCategory="Tous les produits";
-  categoryList = [ 
+  categoryList = [
     "Appareils photo",
     "Consoles",
     "Écrans",
     "Ordinateurs",
     "Tous les produits"
   ];
-  classementList = [ 
+  classementList = [
     "Prix (bas-haut)",
     "Prix (haut-bas)",
     "Nom (A-Z)",
     "Nom (Z-A)"
   ];
-  
+
   constructor(private productService: ProductsService) { this.productsList = new Array<Product>(); }
- 
+
   ngOnInit() {
     this.getProducts();
   }
- 
+
   getProducts(): void {
     this.productService.getProducts(this.sortingCriteria,this.category)
         .then(products => this.productsList = products);
   }
-  
+
   updateCategory(category:string):void {
     if(category==="Tous les produits"){
       this.category="";
@@ -67,5 +67,5 @@ export class ProductsComponent implements OnInit{
     this.selectedCriteria=classement;
     this.getProducts();
   }
-  
+
 }
