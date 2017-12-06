@@ -22,8 +22,6 @@ router.get("/:id", function(req, res) {
 
 // Adds a new order in the database.
 router.post("/", function(req, res) {
-  console.log("route atteinte");
-  console.log(req.body);
   ordersManager.createOrder(req.body).done(function(err) {
     if (err) {
       res.status(400).send();
