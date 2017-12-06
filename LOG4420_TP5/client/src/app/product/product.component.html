@@ -28,7 +28,7 @@
         <p>Prix: <strong id="product-price">{{product.price |  customCurrencyPipe }}</strong></p>
       </div>
     </div>
-    <div class="dialog" id="dialog" *ngIf="notification">
+    <div class="dialog" id="dialog" [hidden]="!notification">
       Le produit a été ajouté au panier.
     </div>
   </div>
