@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import {Order, OrderService} from '../services/order.service';
+import {ShoppingCartProduct,  ShoppingCartService} from '../services/shopping-cart.service';
+
 declare const $: any;
 
 /**
@@ -11,6 +15,14 @@ declare const $: any;
 export class OrderComponent implements OnInit {
 
   orderForm: any;
+  order: Order;
+  idmax = 100000;
+  
+  constructor(
+    private router:Router,
+    private shoppingCartService: ShoppingCartService,
+    private orderService: OrderService
+    ) { }
 
   /**
    * Occurs when the component is initialized.
@@ -46,9 +58,33 @@ export class OrderComponent implements OnInit {
    * Submits the order form.
    */
   submit() {
+
     if (!this.orderForm.valid()) {
       return;
+    }else{
+      let idRand =(Math.random()*this.idmax)| 0;
+      this.orderService.getOrder(idRand).then(order => {//Verification de l'id généré
+        if(!order){
+          this.order = new Order();
+          this.shoppingCartService.getShoppingCart()
+            .then(shoppingCartProducts => {
+              this.order.id = idRand;
+              this.order.firstName = this.orderForm.find('#first-name').val();
+              this.order.lastName = this.orderForm.find('#last-name').val();
+              this.order.email = this.orderForm.find('#email').val();
+              this.order.phone = this.orderForm.find('#phone').val();
+              for(let i = 0; i<shoppingCartProducts.length;i++){
+                this.order.products.push({quantity:shoppingCartProducts[i].quantity,id:shoppingCartProducts[i].productId});
+              }
+              this.orderService.pushOrder(this.order).then(number =>{
+                if(number==201){  // La commande a été enregistrée
+                  this.shoppingCartService.deleteCart();
+                  this.router.navigate(["/confirmation"],{queryParams:{id: idRand, firstName: this.order.firstName,lastName: this.order.lastName}});
+                }});
+            });
+        }
+      })
     }
-    // TODO: Compléter la soumission des informations lorsque le formulaire soumis est valide.
+    
   }
 }

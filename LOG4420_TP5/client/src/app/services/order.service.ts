@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { Config } from '../config';
 
 /**
@@ -11,11 +11,10 @@ export class Order  {
   lastName: string;
   email: string;
   phone: string;
-  products: string;
-  features: [{
+  products: {
 	  quantity: number,
 	  id: number
-  }];
+  }[] = [];
 }
 
 /**
@@ -23,7 +22,10 @@ export class Order  {
  */
 @Injectable()
 export class OrderService {
-
+  
+  private baseUrl = `${Config.apiUrl}/orders/`;
+  private options:RequestOptions = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json' }), withCredentials: true });
+  
   /**
    * Handles the current error.
    *
@@ -63,11 +65,11 @@ export class OrderService {
    * @returns {Promise<number>}    A promise that contains the status code returned by the server.
    */
   pushOrder(order: Order): Promise<number> {
-    const url = `${Config.apiUrl}/orders`;
-	
-    return this.http.post(url,order)
-	  .toPromise()
-	  .then(response => response.status)
-      .catch(() => null);
+    const body = JSON.stringify(order);
+    
+    return this.http.post(this.baseUrl, body, this.options)
+    .toPromise()
+    .then(response => response.status)
+    .catch(OrderService.handleError)
   }
 }

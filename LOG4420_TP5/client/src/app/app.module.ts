@@ -15,6 +15,7 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProductsService } from './services/products.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
+import { OrderService } from './services/order.service';
 
 // Application routes
 const appRoutes: Routes = [
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     ProductsService,
+    OrderService,
     ShoppingCartService,
     { provide: LOCALE_ID, useValue: (document['locale'] ? document['locale'] : 'fr-CA') }
   ],

@@ -64,6 +64,7 @@ self.getOrder = function(orderId) {
  * @returns {promise|*}   A promise object that indicates if an error occurred during the deletion (TRUE/FALSE).
  */
 self.createOrder = function(order) {
+  console.log("createOrder");
   var deferred = Q.defer();
   var productsManager = require("./products");
   productsManager.getProducts().done(function(result) {
@@ -73,6 +74,7 @@ self.createOrder = function(order) {
       return property in order;
     });
     if (!isValid) { // Missing properties
+      console.log("missing properties");
       deferred.resolve(true);
       return deferred.promise;
     }
@@ -87,6 +89,7 @@ self.createOrder = function(order) {
       productIsValid &= "id" in product;
       productIsValid &= "quantity" in product;
       if (!productIsValid) {
+        console.log("non productisValid");
         return false;
       }
       productIsValid &= !isNaN(product.id) && typeof order.id === "number";
@@ -95,6 +98,8 @@ self.createOrder = function(order) {
       return productIsValid;
     });
     if (!isValid) { // Invalid data
+      
+        console.log("invalid data");
       deferred.resolve(true);
       return deferred.promise;
     }
