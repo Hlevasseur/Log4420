@@ -43,7 +43,20 @@ export class OrderService {
    * @param http                    The HTTP service to use.
    */
   constructor(private http: Http) { }
-
+ 
+ /**
+   * Gets the number of Orders.
+   *
+   * 
+   * @returns {Promise<number>}    A promise that contains the order associated with the ID specified.
+   */
+  getNumberOrders(): Promise<number> {
+    return this.http.get(this.baseUrl)
+      .toPromise()
+      .then(orders =>orders.json().length)
+      .catch(() => null);
+  }
+  
   /**
    * Gets the order associated with the order ID specified.
    *

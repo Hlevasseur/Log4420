@@ -62,13 +62,12 @@ export class OrderComponent implements OnInit {
     if (!this.orderForm.valid()) {
       return;
     }else{
-      let idRand =(Math.random()*this.idmax)| 0;
-      this.orderService.getOrder(idRand).then(order => {//Verification de l'id généré
-        if(!order){
+      this.orderService.getNumberOrders().then(idMax => {//Récupération du dernier id
+        if(idMax){
           this.order = new Order();
           this.shoppingCartService.getShoppingCart()
             .then(shoppingCartProducts => {
-              this.order.id = idRand;
+              this.order.id = idMax+1;
               this.order.firstName = this.orderForm.find('#first-name').val();
               this.order.lastName = this.orderForm.find('#last-name').val();
               this.order.email = this.orderForm.find('#email').val();
@@ -79,7 +78,7 @@ export class OrderComponent implements OnInit {
               this.orderService.pushOrder(this.order).then(number =>{
                 if(number==201){  // La commande a été enregistrée
                   this.shoppingCartService.deleteCart();
-                  this.router.navigate(["/confirmation"],{queryParams:{id: idRand, firstName: this.order.firstName,lastName: this.order.lastName}});
+                  this.router.navigate(["/confirmation"],{queryParams:{id: this.order.id, firstName: this.order.firstName,lastName: this.order.lastName}});
                 }});
             });
         }
