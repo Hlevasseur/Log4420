@@ -56,12 +56,14 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   flushCart(): void {
-    const self = this;
-    this.shoppingCartService.deleteCart()
-      .then(()=> {
-        self.products = [];
-        self.updateSum();
-      });
+    if(confirm("Voulez-vous supprimer tous les produits du panier ?")) {
+      const self = this;
+      this.shoppingCartService.deleteCart()
+        .then(()=> {
+          self.products = [];
+          self.updateSum();
+        });
+    }
   }
 
 }
